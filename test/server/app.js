@@ -90,6 +90,12 @@ app.get('/request/querystring', function(){
 app.post('/request/querystring', function(){
   this.body = this.querystring
 })
+app.put('/request/querystring', function(){
+  this.body = this.querystring
+})
+app.del('/request/querystring', function(){
+  this.body = this.querystring
+})
 
 
 app.get('/request/length', function(){
