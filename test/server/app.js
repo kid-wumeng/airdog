@@ -117,4 +117,10 @@ app.get('/request/get/custom-header', function(){
 })
 
 
+app.get('/response/set/custom-header', function(){
+  this.set('name', 'kid')
+  this.body = 'ok'
+})
+
+
 app.listen(5000)
