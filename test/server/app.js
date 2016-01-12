@@ -117,6 +117,15 @@ app.get('/request/get/custom-header', function(){
 })
 
 
+app.get('/response/status/getter', function(){
+  this.body = this.status
+})
+app.get('/response/status/setter', function(){
+  this.status = 302
+  this.body = 'ok'
+})
+
+
 app.get('/response/set/custom-header', function(){
   this.set('name', 'kid')
   this.body = 'ok'
