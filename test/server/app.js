@@ -98,11 +98,6 @@ app.del('/request/querystring', function(){
 })
 
 
-app.get('/request/query', function(){
-  this.body = this.query
-})
-
-
 app.get('/request/length', function(){
   this.body = this.length
 })
@@ -120,7 +115,6 @@ app.del('/request/length', function(){
 app.get('/request/get/custom-header', function(){
   this.body = this.get('custom-header')
 })
-
 
 
 app.listen(5000)
