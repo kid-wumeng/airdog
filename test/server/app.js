@@ -98,6 +98,11 @@ app.del('/request/querystring', function(){
 })
 
 
+app.get('/request/query', function(){
+  this.body = this.query
+})
+
+
 app.get('/request/length', function(){
   this.body = this.length
 })
