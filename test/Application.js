@@ -50,5 +50,19 @@ describe("{ Application }", function()
       done()
     })
   })
-    
+  
+  it(" should receive '1 start', '2 start', '3 start', 'body', '3 end', '2 end', '1 end'", function(done){
+    request.get('http://localhost:5000/use/1', function(err, res, body){
+      body.should.equal('1 start, 2 start, 3 start, body, 3 end, 2 end, 1 end')
+      done()
+    })
+  })
+  
+  it(" should receive '1 start', '2 start', '3 start', 'body', '3 end', '2 end', '1 end'", function(done){
+    request.get('http://localhost:5000/use/2', function(err, res, body){
+      body.should.equal('0 start, 1 start, 2 start, 3 start, body, 3 end, 2 end, 1 end, 0 end')
+      done()
+    })
+  })
+
 })

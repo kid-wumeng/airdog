@@ -26,6 +26,59 @@ app.get('/json', async function(){
 })
 
 
+
+app.get('/use/1')
+  .use(async function(){
+    this.testResult = []
+    this.testResult.push('1 start')
+    await this.next
+    this.testResult.push('1 end')
+    this.body = this.testResult.join(', ')
+  })
+  .use(async function(){
+    this.testResult.push('2 start')
+    await this.next
+    this.testResult.push('2 end')
+  })
+  .use(async function(){
+    this.testResult.push('3 start')
+    await this.next
+    this.testResult.push('3 end')
+  })
+  .use(function(){
+    this.body = 'ok'
+    this.testResult.push('body')
+  })
+  
+app.get('/use/2', async function(){
+  this.testResult = []
+  this.testResult.push('0 start')
+  await this.next
+  this.testResult.push('0 end')
+  this.body = this.testResult.join(', ')
+})
+  .use(async function(){
+    this.testResult.push('1 start')
+    await this.next
+    this.testResult.push('1 end')
+  })
+  .use(async function(){
+    this.testResult.push('2 start')
+    await this.next
+    this.testResult.push('2 end')
+  })
+  .use(async function(){
+    this.testResult.push('3 start')
+    await this.next
+    this.testResult.push('3 end')
+  })
+  .use(function(){
+    this.body = 'ok'
+    this.testResult.push('body')
+  })
+
+
+
 app.get('/request/verb', function(){
   this.body = this.verb
 })
