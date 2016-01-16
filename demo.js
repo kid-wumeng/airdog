@@ -1,28 +1,43 @@
-let Airdog = require('./lib/Application')
-let app = new Airdog
+// let Airdog = require('./lib/Application')
+// let app = new Airdog
+//
+//
+// app.get('/abc')
+//   .use(async function m1(){
+//     await this.next
+//   })
+//   .use(async function m2(){
+//     await this.next
+//   })
+//   .use(async function m3(){
+//     await this.next
+//   })
+//   .use(function(){
+//     this.set('Content-Type', 'text/html')
+//     this.status = '200'
+//     this.body = '<script src="test2.js"></script>'
+//   })
+//
+//
+// app.get('test2.js', function(){
+//   console.log(this.get('If-Modified-Since'));
+//   this.set('Content-Type', 'text/javascript')
+//   this.body = 'console.log("123")'
+// })
+//
+//
+// app.listen(8080)
 
 
+var fs = require('./lib/async-await-fs')
 
-app.get('/abc')
-  .use(async function m1(){
-    console.log('m1 start')
-    await this.next
-    console.log('m1 end')
-  })
-  .use(async function m2(){
-    console.log('m2 start')
-    await this.next
-    console.log('m2 end')
-  })
-  .use(async function m3(){
-    console.log('m3 start')
-    await this.next
-    console.log('m3 end')
-  })
-  .use(function(){
-    this.body = 'successful'
-  })
+async function fn(){
+  try {
+    var result = await fs.readFile('.gitignore', 'utf-8')
+    console.log(result)
+  } catch(e) {
+    console.log(e);
+  }
+}
 
-
-
-app.listen(8080)
+fn()
