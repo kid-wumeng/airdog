@@ -179,6 +179,12 @@ app.get('/response/status/setter', function(){
 })
 
 
+app.get('/response/type/json', function(){
+  this.type = 'application/json'
+  this.body = 'ok'
+})
+
+
 app.get('/response/set/custom-header', function(){
   this.set('name', 'kid')
   this.body = 'ok'
