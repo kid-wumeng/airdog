@@ -4,4 +4,10 @@ let app = new Airdog({
 })
 
 
+app.get('/', async function(){
+  // this.body = require('fs').createReadStream('index.js')
+  this.body = 9898
+})
+
+
 app.listen(8080)
