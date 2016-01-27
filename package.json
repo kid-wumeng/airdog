@@ -17,7 +17,8 @@
     "babel-preset-stage-0": "~6.3.13",
     "babel-preset-stage-1": "~6.3.13",
     "babel-preset-stage-2": "~6.3.13",
-    "babel-preset-stage-3": "~6.3.13"
+    "babel-preset-stage-3": "~6.3.13",
+    "hogan.js": "^3.0.2"
   },
   "devDependencies": {
     "chai": "^3.4.1",

@@ -1,12 +1,18 @@
 let Airdog = require('./lib/Application')
 let app = new Airdog({
-  static: '/'
+  static: ['/test/static']
 })
 
 
 app.get('/', async function(){
-  // this.body = require('fs').createReadStream('index.js')
-  this.body = 9898
+  try {
+    await this.render('test/static/abc.html', {
+      title: 'this is airdog',
+      name: 'kid is me'
+    })
+  } catch(e){
+    console.log(e)
+  }
 })
 
 
