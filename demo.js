@@ -1,19 +1,14 @@
 let Airdog = require('./lib/Application')
 let app = new Airdog({
-  static: ['/test/static']
+  static: 'test/static/'
 })
 
+async function common(){
+  this.body = 'hahaha'
+}
 
-app.get('/', async function(){
-  try {
-    await this.render('test/static/abc.html', {
-      title: 'this is airdog',
-      name: 'kid is me'
-    })
-  } catch(e){
-    console.log(e)
-  }
-})
+app.get('/abc2.html')
+  .use(common)
 
 
 app.listen(8080)
