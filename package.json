@@ -2,7 +2,7 @@
   "name": "airdog",
   "version": "0.0.0",
   "scripts": {
-    "test": "mocha --require babel-core/register --reporter nyan"
+    "test": "babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- --reporter spec"
   },
   "babel": {
     "presets": [
@@ -21,7 +21,11 @@
     "hogan.js": "^3.0.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.2.0",
+    "babel-istanbul": "^0.6.0",
     "chai": "^3.4.1",
+    "mocha": "^2.4.5",
     "request": "^2.67.0"
   }
+  
 }
