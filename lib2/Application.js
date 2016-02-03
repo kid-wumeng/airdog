@@ -37,6 +37,13 @@ class Application {
    * @param { async Function } mid
    */
    
+  all( path, mid ){
+    this.add( 'GET', path, mid )
+    this.add( 'POST', path, mid )
+    this.add( 'PUT', path, mid )
+    this.add( 'DELETE', path, mid )
+    return this
+  }
   get( path, mid ){
     return this.add( 'GET', path, mid )
   }
