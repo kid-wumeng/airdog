@@ -34,4 +34,27 @@
 
 
 import Airdog from './lib/Airdog'
-let Middleware = Airdog.import('MiddlewareQueue')
+let MiddlewareQueue = Airdog.import('MiddlewareQueue')
+
+let midQue = new MiddlewareQueue()
+midQue.add(async function(){
+  console.log('1 start')
+  await this.next
+  console.log('1 end')
+})
+midQue.add(async function(){
+  console.log('2 start')
+  await this.next
+  console.log('2 end')
+})
+midQue.add(async function(){
+  console.log('3 start')
+  await this.next
+  console.log('3 end')
+})
+midQue.add(async function(){
+  console.log('4 start')
+  await this.next
+  console.log('4 end')
+})
+midQue.run()
