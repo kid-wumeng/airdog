@@ -19,3 +19,4 @@ global.runSuite = function(module){
 }
 
 runSuite('Middleware.run')
+runSuite('MiddlewareQueue.run')
