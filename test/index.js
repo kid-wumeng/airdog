@@ -10,6 +10,7 @@ global.test = mocha.test
 global.request = require('request')
 global.Airdog = require('../lib/Airdog')
 global.util = require('./asset/util')
+global.Flag = util.Flag
 
 global.runSuite = function(module){
   suite(module, function(){
