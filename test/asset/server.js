@@ -1,4 +1,4 @@
-let Airdog = require('../lib/Application')
+let Airdog = require('../../lib/Airdog')
 let app = new Airdog()
 
 app.get('/body', function(){
