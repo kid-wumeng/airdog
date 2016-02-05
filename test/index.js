@@ -21,3 +21,5 @@ global.runSuite = function(module){
 
 runSuite('Middleware.run')
 runSuite('MiddlewareQueue.run')
+runSuite('Route.parseRegExp')
+runSuite('Route.match')
