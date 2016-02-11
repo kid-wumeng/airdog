@@ -1,39 +1,58 @@
+// import Airdog from './lib/Airdog'
+// let Server = Airdog.import('Server')
+// let request = require('request')
+//
+//
+// var app = new Server
+//
+// app.all('/user/12')
+// .use(async function(){
+//   console.log('1 start');
+//   await this.next
+//   console.log('1 end');
+// })
+// .use(async function(){
+//   console.log('2 start');
+//   await this.next
+//   console.log('2 end');
+// })
+// .use(async function(){
+//   console.log('3 start');
+//   await this.next
+//   console.log('3 end');
+// })
+//
+//
+// app.get('/user/12')
+// .use(async function(){
+//   console.log('4 start');
+//   await this.next
+//   console.log('4 end');
+// })
+//
+//
+//
+// app.listen(8080)
+//
+// request.get('http://localhost:8080/user/12', function(err, res, body){
+//   console.log(body);
+// })
+
+
+
 import Airdog from './lib/Airdog'
-let Server = Airdog.import('Server')
-let request = require('request')
+let Delegator = Airdog.import('Delegator')
 
 
-var app = new Server
+let a = {
+  get name(){
+    return 'wumeng'
+  }
+}
 
-app.all('/user/12')
-.use(async function(){
-  console.log('1 start');
-  await this.next
-  console.log('1 end');
-})
-.use(async function(){
-  console.log('2 start');
-  await this.next
-  console.log('2 end');
-})
-.use(async function(){
-  console.log('3 start');
-  await this.next
-  console.log('3 end');
-})
+let b = {}
 
+let delegator = new Delegator(b, a)
+delegator.getter('name')
 
-app.get('/user/12')
-.use(async function(){
-  console.log('4 start');
-  await this.next
-  console.log('4 end');
-})
-
-
-
-app.listen(8080)
-
-request.get('http://localhost:8080/user/12', function(err, res, body){
-  console.log(body);
-})
+console.log(b.name)
