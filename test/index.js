@@ -20,8 +20,8 @@ global.clientBase = null
 
 global.runSuite = function(module){
   let path = module.replace(/\./g, '/')
-  global.clientBase = path
   suite(module, function(){
+    suiteSetup(() => { global.clientBase = path })
     require(`${TEST_BASE}/suite/${path}`)
   })
 }
@@ -54,9 +54,9 @@ let Server = Airdog.import('Server')
 global.app = new Server
 
 addService('Request.method')
+addService('_middleware.Send.basic')
 
 app.listen(8080)
-
 
 
 runSuite('Middleware.run')
@@ -68,5 +68,5 @@ runSuite('Delegator.method')
 runSuite('Delegator.getter')
 runSuite('Delegator.setter')
 runSuite('Delegator.access')
-runSuite('Server.#body')
 runSuite('Request.method')
+runSuite('_middleware.Send.basic')
