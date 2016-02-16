@@ -36,8 +36,6 @@ global.addService = function(module){
 
 
 
-
-
 global.client = {}
 global.client.request = function(method, path, callback){
   let url = `http://localhost:8080/${clientBase}${path}`
