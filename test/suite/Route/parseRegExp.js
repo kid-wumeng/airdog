@@ -23,6 +23,13 @@ test('Parse Star-Path', function(){
 
 
 
+test('Parse All-Path', function(){
+  let regexp = Route.parseRegExp('*')
+  regexp.should.eql(/^(?:.+)$/)
+})
+
+
+
 test('Parse Mixed-Path', function(){
   let regexp = Route.parseRegExp('/A/:p/*')
   regexp.should.eql(/^\/A\/([^\/]+?)\/(?:.+)\/$/)
