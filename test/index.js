@@ -18,6 +18,7 @@ global.Flag = util.Flag
 global.clientBase = null
 
 
+
 global.runSuite = function(module){
   let path = module.replace(/\./g, '/')
   suite(module, function(){
@@ -54,7 +55,7 @@ let Server = Airdog.import('Server')
 global.app = new Server
 
 addService('Request.method')
-addService('_middleware.Send.basic')
+addService('_middleware.Send.@basic')
 
 app.listen(8080)
 
@@ -64,9 +65,7 @@ runSuite('MiddlewareQueue.run')
 runSuite('Route.parseRegExp')
 runSuite('Route.match')
 runSuite('RouteTable.match')
-runSuite('Delegator.method')
-runSuite('Delegator.getter')
-runSuite('Delegator.setter')
-runSuite('Delegator.access')
+runSuite('Server.@basic')
+runSuite('Delegator.@basic')
 runSuite('Request.method')
-runSuite('_middleware.Send.basic')
+runSuite('_middleware.Send.@basic')
