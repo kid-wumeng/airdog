@@ -30,7 +30,7 @@ global.runSuite = function(module){
 
 global.addService = function(module){
   let path = module.replace(/\./g, '/')
-  server.setBase(`/${path}`)
+  app.setBase(`/${path}`)
   require(`${TEST_BASE}/server/${path}`)
 }
 
@@ -53,11 +53,11 @@ global.client.del  = function(path, callback){ client.request('del',  path, call
 
 
 let Server = Airdog.import('Server')
-global.server = new Server
+global.app = new Server
 
 addService('Request.method')
 
-server.listen(8080)
+app.listen(8080)
 
 
 

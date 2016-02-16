@@ -1,18 +1,18 @@
-server.get('/get', function(){
+app.get('/get', function(){
   this.body = this.method
 })
 
 
-server.post('/post', function(){
+app.post('/post', function(){
   this.body = this.method
 })
 
 
-server.put('/put', function(){
+app.put('/put', function(){
   this.body = this.method
 })
 
 
-server.del('/del', function(){
+app.del('/del', function(){
   this.body = this.method
 })
