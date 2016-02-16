@@ -4,7 +4,6 @@ app.get('/get', function(){
 
 
 app.post('/post', function(){
-  console.log('1111');
   this.body = this.method
 })
 
