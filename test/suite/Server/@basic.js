@@ -1,4 +1,5 @@
 let Server = Airdog.import('Server')
+let request = require('request')
 
 
 test('Close Server', function(done)
@@ -15,7 +16,6 @@ test('Close Server', function(done)
     flag.mark(1)
   })
   
-  let request = require('request')
   request.get('http://127.0.0.1:8081', function(err, res, body){
     flag.assert()
     done()

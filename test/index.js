@@ -38,22 +38,27 @@ global.addService = function(module){
 
 
 global.client = {}
-global.client.request = function(method, path, callback){
-  let url = `http://localhost:8080/${clientBase}${path}`
-  request[method](url, function(err, res, body){
+global.client.request = function(method, path, options, callback){
+  if(typeof options === 'function'){
+    callback = options
+    options = {}
+  }
+  options.url = `http://127.0.0.1:8080/${clientBase}${path}`
+  request[method](options, function(err, res, body){
     callback(res, body)
   })
 }
 
-global.client.get  = function(path, callback){ client.request('get' , path, callback) }
-global.client.post = function(path, callback){ client.request('post', path, callback) }
-global.client.put  = function(path, callback){ client.request('put',  path, callback) }
-global.client.del  = function(path, callback){ client.request('del',  path, callback) }
+global.client.get  = function(path, options, callback){ client.request('get',  path, options, callback) }
+global.client.post = function(path, options, callback){ client.request('post', path, options, callback) }
+global.client.put  = function(path, options, callback){ client.request('put',  path, options, callback) }
+global.client.del  = function(path, options, callback){ client.request('del',  path, options, callback) }
 
 
 let Server = Airdog.import('Server')
 global.app = new Server
 
+addService('Request.@header')
 addService('Request.method')
 addService('_middleware.Send.@basic')
 
@@ -67,5 +72,6 @@ runSuite('Route.match')
 runSuite('RouteTable.match')
 runSuite('Server.@basic')
 runSuite('Delegator.@basic')
+runSuite('Request.@header')
 runSuite('Request.method')
 runSuite('_middleware.Send.@basic')
