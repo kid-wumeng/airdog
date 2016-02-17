@@ -58,6 +58,7 @@ global.client.del  = function(path, options, callback){ client.request('del',  p
 let Server = Airdog.import('Server')
 global.app = new Server
 
+addService('Request.@basic')
 addService('Request.@header')
 addService('Request.method')
 addService('_middleware.Send.@basic')
@@ -72,6 +73,7 @@ runSuite('Route.match')
 runSuite('RouteTable.match')
 runSuite('Server.@basic')
 runSuite('Delegator.@basic')
+runSuite('Request.@basic')
 runSuite('Request.@header')
 runSuite('Request.method')
 runSuite('_middleware.Send.@basic')
