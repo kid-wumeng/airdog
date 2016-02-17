@@ -60,7 +60,6 @@ global.app = new Server
 
 addService('Request.@basic')
 addService('Request.@header')
-addService('Request.method')
 addService('_middleware.Send.@basic')
 
 app.listen(8080)
@@ -75,5 +74,4 @@ runSuite('Server.@basic')
 runSuite('Delegator.@basic')
 runSuite('Request.@basic')
 runSuite('Request.@header')
-runSuite('Request.method')
 runSuite('_middleware.Send.@basic')
