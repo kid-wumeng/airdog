@@ -2,19 +2,6 @@ let Delegator = Airdog.import('Delegator')
 
 
 
-test('Delegate Method', function(){
-  let src = {}, dest = {}
-  src.fn1 = function(){ return 1 }
-  src.fn2 = function(){ return 2 }
-  new Delegator(dest, src)
-    .method('fn1')
-    .method('fn2')
-  dest.fn1().should.equal(1)
-  dest.fn2().should.equal(2)
-})
-
-
-
 test('Delegate Getter', function(){
   let src = {
     get g1(){ return 1 },
@@ -69,4 +56,54 @@ test('Delegate Access', function(){
   dest.a3 = 3
   val1.should.equal(1)
   val3.should.equal(3)
+})
+
+
+
+test('Delegate Method', function(){
+  let src = {}, dest = {}
+  src.fn1 = function(){ return 1 }
+  src.fn2 = function(){ return 2 }
+  new Delegator(dest, src)
+    .method('fn1')
+    .method('fn2')
+  dest.fn1().should.equal(1)
+  dest.fn2().should.equal(2)
+})
+
+
+
+test('Delegate Async-Await ( Resolve )', async function(){
+  let src = {}, dest = {}
+  src.sleep = function(ms, callback){
+    setTimeout(function(){
+      callback(null, 'kid')
+    }, ms)
+  }
+  
+  new Delegator(dest, src)
+    .async_await('sleep')
+
+  let name = await dest.sleep(1)
+  name.should.equal('kid')
+})
+
+
+
+test('Delegate Async-Await ( Reject )', async function(){
+  let src = {}, dest = {}
+  src.sleep = function(ms, callback){
+    setTimeout(function(){
+      callback('throw-error')
+    }, ms)
+  }
+  
+  new Delegator(dest, src)
+    .async_await('sleep')
+    
+  try {
+    await dest.sleep(1)
+  } catch(e){
+    e.should.equal('throw-error')
+  }
 })
