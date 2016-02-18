@@ -29,9 +29,9 @@ test('Match by Normal-Path with method ALL', function(done)
   }
   
   let routeTable = new RouteTable
-  let r1 = new Route('/user/12', fn1)
-  let r2 = new Route('/user/12', fn2)
-  let r3 = new Route('/user/12', fn3)
+  let r1 = new Route('/user/12/', fn1)
+  let r2 = new Route('/user/12/', fn2)
+  let r3 = new Route('/user/12/', fn3)
   routeTable.add(RouteTable.ALL, r1)
   routeTable.add(RouteTable.ALL, r2)
   routeTable.add(RouteTable.ALL, r3)
@@ -73,9 +73,9 @@ test('Match by Mixed-Path with method GET', function(done)
   }
   
   let routeTable = new RouteTable
-  let r1 = new Route('/src/:type/*/:name', fn1)
-  let r2 = new Route('/:dir/*/icon/:name', fn2)
-  let r3 = new Route('/res/:type/*/:name', fn3)
+  let r1 = new Route('/src/:type/*/:name/', fn1)
+  let r2 = new Route('/:dir/*/icon/:name/', fn2)
+  let r3 = new Route('/res/:type/*/:name/', fn3)
   routeTable.add(RouteTable.GET, r1)
   routeTable.add(RouteTable.GET, r2)
   routeTable.add(RouteTable.GET, r3)

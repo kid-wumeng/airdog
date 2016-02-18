@@ -29,3 +29,12 @@ test('Merge Class\'s this', function(){
   obj.name.should.equal('kid')
   obj.age.should.equal(18)
 })
+
+
+
+test('Merge ( No-Src )', function(){
+  let dest = {}
+  let res = Kit.merge(dest)
+  dest.should.empty
+  res.should.empty
+})
