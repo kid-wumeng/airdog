@@ -31,7 +31,7 @@ global.runSuite = function(module){
 
 global.addService = function(module){
   let path = module.replace(/\./g, '/')
-  app.setBase(`/${path}`)
+  app.base = `/${path}`
   require(`${TEST_BASE}/server/${path}`)
 }
 
@@ -74,4 +74,5 @@ runSuite('Server.@basic')
 runSuite('Delegator.@basic')
 runSuite('Request.@basic')
 runSuite('Request.@header')
+runSuite('Kit.@basic')
 runSuite('_middleware.Send.@basic')
