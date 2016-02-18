@@ -73,16 +73,17 @@ test('Delegate Method', function(){
 
 
 
-test('Delegate Async-Await ( Resolve )', async function(){
+test('Delegate Async-Await ( Resolve )', async function()
+{
   let src = {}, dest = {}
+  
   src.sleep = function(ms, callback){
     setTimeout(function(){
       callback(null, 'kid')
     }, ms)
   }
   
-  new Delegator(dest, src)
-    .async_await('sleep')
+  new Delegator(dest, src).async_await('sleep')
 
   let name = await dest.sleep(1)
   name.should.equal('kid')
@@ -90,16 +91,17 @@ test('Delegate Async-Await ( Resolve )', async function(){
 
 
 
-test('Delegate Async-Await ( Reject )', async function(){
+test('Delegate Async-Await ( Reject )', async function()
+{
   let src = {}, dest = {}
+  
   src.sleep = function(ms, callback){
     setTimeout(function(){
       callback('throw-error')
     }, ms)
   }
   
-  new Delegator(dest, src)
-    .async_await('sleep')
+  new Delegator(dest, src).async_await('sleep')
     
   try {
     await dest.sleep(1)
