@@ -1,11 +1,11 @@
+import request from 'request'
 let Server = Airdog.import('Server')
-let request = require('request')
 
 
-test('Close Server', function(done)
-{
+
+test('Close Server', function(done){
   let flag = new Flag(1)
-  let server = new Server()
+  let server = new Server
   
   server.get('/', function(){
     flag.mark()

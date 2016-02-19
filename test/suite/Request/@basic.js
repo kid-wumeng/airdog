@@ -1,3 +1,8 @@
+import request from 'request'
+let Server = Airdog.import('Server')
+
+
+
 test('Get Method-GET', function(done){
   client.get('/method-get', function(res, body){
     body.should.equal('GET')
@@ -25,6 +30,12 @@ test('Get Method-DELETE', function(done){
 
 
 
+test('Get Protocol ( HTTP )', function(done){
+  client.get('/protocol', function(res, body){
+    body.should.equal('http')
+    done()
+  })
+})
 test('Get Host', function(done){
   client.get('/host', function(res, body){
     body.should.equal('127.0.0.1:8080')
