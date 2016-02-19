@@ -22,3 +22,6 @@ app.get('protocol', function(){
 app.get('host', function(){
   this.body = this.host
 })
+app.get('hostname', function(){
+  this.body = this.hostname
+})

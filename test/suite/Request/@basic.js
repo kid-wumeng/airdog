@@ -48,3 +48,9 @@ test('Get Host', function(done){
     done()
   })
 })
+test('Get Host-Name', function(done){
+  client.get('/hostname', function(res, body){
+    body.should.equal('127.0.0.1')
+    done()
+  })
+})
