@@ -4,9 +4,7 @@ app.get('/get-system-header', function(){
 
 app.get('/get-custom-header', function(){
   let username = this.get('user-name')
-  if( username === null ){
+  username === null ?
     this.body = 'null'
-  } else {
-    this.body = username
-  }
+  : this.body = username
 })

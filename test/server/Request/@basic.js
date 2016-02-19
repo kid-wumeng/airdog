@@ -28,3 +28,11 @@ app.get('hostname', function(){
 app.get('port', function(){
   this.body = this.port
 })
+
+
+
+app.get('type', function(){
+  this.type === null ?
+    this.body = 'null'
+  : this.body = this.type
+})

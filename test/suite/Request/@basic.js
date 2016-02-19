@@ -60,3 +60,28 @@ test('Get Port', function(done){
     done()
   })
 })
+
+
+
+test('Get Type ( Form-Data )', function(done){
+  let form = { name: 'kid', age: 18 }
+  let options = { form: form }
+  client.get('/type', options, function(res, body){
+    body.should.equal('application/x-www-form-urlencoded')
+    done()
+  })
+})
+test('Get Type ( Custom )', function(done){
+  let headers = {'Content-Type': 'Custom-Data-Type'}
+  let options = { headers: headers }
+  client.get('/type', options, function(res, body){
+    body.should.equal('Custom-Data-Type')
+    done()
+  })
+})
+test('Get Type ( null )', function(done){
+  client.get('/type', function(res, body){
+    body.should.equal('null')
+    done()
+  })
+})
