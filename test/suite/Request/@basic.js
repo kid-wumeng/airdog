@@ -30,6 +30,12 @@ test('Get Method-DELETE', function(done){
 
 
 
+test('Get URL', function(done){
+  client.get('/url?name=kid&age=18', function(res, body){
+    body.should.equal('http://127.0.0.1:8080/Request/@basic/url?name=kid&age=18')
+    done()
+  })
+})
 test('Get Protocol ( HTTP )', function(done){
   client.get('/protocol', function(res, body){
     body.should.equal('http')

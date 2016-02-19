@@ -13,6 +13,9 @@ app.del('/method-del', function(){
 
 
 
+app.get('url', function(){
+  this.body = this.url
+})
 app.get('protocol', function(){
   this.body = this.protocol
 })
