@@ -54,3 +54,9 @@ test('Get Host-Name', function(done){
     done()
   })
 })
+test('Get Port', function(done){
+  client.get('/port', function(res, body){
+    body.should.equal('8080')
+    done()
+  })
+})
