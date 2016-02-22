@@ -62,6 +62,7 @@ addService('Request.@basic')
 addService('Request.@header')
 addService('Response.@header')
 addService('_middleware.Send.@basic')
+addService('_middleware.DataParse.@basic')
 
 app.listen(8080)
 
@@ -78,3 +79,4 @@ runSuite('Request.@header')
 runSuite('Response.@header')
 runSuite('Kit.@basic')
 runSuite('_middleware.Send.@basic')
+runSuite('_middleware.DataParse.@basic')
