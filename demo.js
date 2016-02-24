@@ -7,30 +7,13 @@ let Server = Airdog.import('Server')
 let s = new Server()
 
 s.get('/', function(){
-  console.log(this.data);
-  console.log(this.file);
+  console.log(this.port);
 })
 
 s.listen(8080)
 
 request.get({
-  url: 'http://127.0.0.1:8080',
-  formData: {
-    myname: 'kid',
-    filename: 'hahaha',
-    like: ['Comic', 'Music'],
-    'face' : {
-      value: fs.createReadStream(__dirname + '/test1.txt'),
-      options: {}
-    },
-    'photos' : [{
-      value: fs.createReadStream(__dirname + '/test1.txt'),
-      options: {}
-    }, {
-      value: fs.createReadStream(__dirname + '/test2.txt'),
-      options: {}
-    }]
-  }
+  url: 'http://127.0.0.1:8080'
 }, function(err, res, body){
   s.close()
 })

@@ -2,6 +2,10 @@ app.get('/get-system-header', function(){
   this.body = this.get('host')
 })
 
+app.get('/get-system-header-referer', function(){
+  this.body = this.get('referer')
+})
+
 app.get('/get-custom-header', function(){
   let username = this.get('user-name')
   username === null ?
