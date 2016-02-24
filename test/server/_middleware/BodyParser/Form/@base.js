@@ -5,10 +5,3 @@ app.get('/data', function(){
 app.post('/data', function(){
   this.body = this.data
 })
-
-app.get('/data-and-file', function(){
-  this.body = {
-    data: this.data,
-    file: this.file
-  }
-})
