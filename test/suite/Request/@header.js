@@ -18,6 +18,17 @@ test('Get System-Header ( referer )', function(done){
 
 
 
+test('Get System-Header ( referrer )', function(done){
+  let headers = {'referer': 'localhost'}
+  let options = { headers: headers }
+  client.get('/get-system-header-referrer', options, function(res, body){
+    body.should.equal('localhost')
+    done()
+  })
+})
+
+
+
 test('Get Custom-Header', function(done){
   let headers = {'user-name': 'kid'}
   let options = { headers: headers }
