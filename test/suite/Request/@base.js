@@ -60,6 +60,12 @@ test('Get Port', function(done){
     done()
   })
 })
+test('Get Path', function(done){
+  client.get('/path', function(res, body){
+    body.should.equal('/Request/@base/path')
+    done()
+  })
+})
 
 
 

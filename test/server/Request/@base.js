@@ -28,6 +28,9 @@ app.get('hostname', function(){
 app.get('port', function(){
   this.body = this.port
 })
+app.get('path', function(){
+  this.body = this.path
+})
 
 
 
