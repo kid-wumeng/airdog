@@ -56,7 +56,9 @@ global.client.del  = function(path, options, callback){ client.request('del',  p
 
 
 let Server = Airdog.import('Server')
-global.app = new Server
+global.app = new Server({
+  static: 'public'
+})
 
 addService('Request.@base')
 addService('Request.@header')
