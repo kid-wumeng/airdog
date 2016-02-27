@@ -57,7 +57,7 @@ global.client.del  = function(path, options, callback){ client.request('del',  p
 
 let Server = Airdog.import('Server')
 global.app = new Server({
-  static: 'public'
+  static: `${__dirname}/server/_middleware/Static/`
 })
 
 addService('Request.@base')
@@ -83,6 +83,7 @@ runSuite('Request.@header')
 runSuite('Response.@header')
 runSuite('Kit.@base')
 runSuite('_middleware.Send.@base')
+runSuite('_middleware.Static')
 runSuite('_middleware.BodyParser.JSON.@base')
 runSuite('_middleware.BodyParser.Form.@base')
 runSuite('_middleware.BodyParser.File.@base')
