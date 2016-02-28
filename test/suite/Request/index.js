@@ -2,7 +2,6 @@ import request from 'request'
 let Server = Airdog.import('Server')
 
 
-
 test('Get Method-GET', function(done){
   client.get('/method-get', function(res, body){
     body.should.equal('GET')
