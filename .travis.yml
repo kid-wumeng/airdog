@@ -3,4 +3,4 @@ node_js:
   - "5.1"
 branches:
   only:
-    - dev
+    - master

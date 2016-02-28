@@ -15,7 +15,7 @@ s.get('/', function(){
 s.listen(8080)
 
 request.get({
-  url: 'http://127.0.0.1:8080/',
+  url: 'http://127.0.0.1:8080/index.js',
 }, function(err, res, body){
   console.log(body);
   s.close()
