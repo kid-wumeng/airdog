@@ -6,7 +6,6 @@ app.get('/get-system-header-referer', function(){
   this.body = this.get('referer')
 })
 
-
 app.get('/get-system-header-referrer', function(){
   this.body = this.get('referrer')
 })
