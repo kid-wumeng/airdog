@@ -32,7 +32,7 @@ test('Merge Class\'s this', function(){
 
 
 
-test('Merge ( No-Src )', function(){
+test('Merge ( no Src )', function(){
   let dest = {}
   let res = Kit.merge(dest)
   dest.should.empty
