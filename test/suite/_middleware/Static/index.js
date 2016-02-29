@@ -54,6 +54,7 @@ test('Get PNG ( unvalid-gzip )', function(done){
   request.get('http://127.0.0.1:8080/_test.png', options, function(err, res, body){
     res.headers['content-type'].should.equal('image/png')
     res.headers.should.not.include.keys('content-encoding')
+    
     let image = fs.readFileSync(`${__dirname}/_test.png`, 'utf-8')
     body.should.equal(image)
     done()

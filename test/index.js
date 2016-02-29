@@ -63,11 +63,14 @@ global.app = new Server({
 
 addService('Request')
 addService('Request.get')
+addService('Response')
 addService('Response.set')
+addService('_middleware.FS')
 addService('_middleware.Send')
 addService('_middleware.BodyParser.JSON')
 addService('_middleware.BodyParser.Form')
 addService('_middleware.BodyParser.File')
+
 
 app.listen(8080)
 
@@ -81,9 +84,11 @@ runSuite('Server')
 runSuite('Delegator')
 runSuite('Request')
 runSuite('Request.get')
+runSuite('Response')
 runSuite('Response.set')
 runSuite('Kit')
 runSuite('_middleware.Send')
+runSuite('_middleware.FS')
 runSuite('_middleware.Static')
 runSuite('_middleware.BodyParser.JSON')
 runSuite('_middleware.BodyParser.Form')
