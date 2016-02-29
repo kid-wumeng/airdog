@@ -5,18 +5,18 @@ import https from 'https'
 let Server = Airdog.import('Server')
 
 let s = new Server({
-  static: `${__dirname}`
 })
 
 s.get('/', function(){
-  // console.log(this.host);
+  this.raw.res.setHeader('Content-Length', 30)
+  this.body = '12345678'
 })
 
 s.listen(8080)
 
 request.get({
-  url: 'http://127.0.0.1:8080/index.js',
+  url: 'http://127.0.0.1:8080/',
 }, function(err, res, body){
-  console.log(body);
+  console.log(body.length);
   s.close()
 })

@@ -6,7 +6,6 @@ test('Get Status', function(done){
 })
 
 
-
 test('Get Type', function(done){
   client.get('/type', function(res, body){
     body.should.equal('application/airdog')

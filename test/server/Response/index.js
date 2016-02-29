@@ -4,7 +4,6 @@ app.get('/type', function(){
 })
 
 
-
 app.get('/status', function(){
   this.status = 306
   this.body = this.status
