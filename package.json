@@ -1,13 +1,16 @@
 {
   "name": "airdog",
   "version": "0.1.0",
+  "author": {
+    "name": "KID.WuMeng",
+    "email": "kid.wumeng@gmail.com",
+    "url": "https://github.com/KID-WuMeng"
+  },
   "scripts": {
     "test": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter spec"
   },
   "babel": {
-    "presets": [
-      "stage-3"
-    ]
+    "presets": ["stage-3"]
   },
   "dependencies": {
     "babel-core": "~6.3.26",
