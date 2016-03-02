@@ -2,7 +2,7 @@
   "name": "airdog",
   "version": "0.1.0",
   "scripts": {
-    "test": "node mocha --reporter spec"
+    "test": "mocha"
   },
   "babel": {
     "presets": [
