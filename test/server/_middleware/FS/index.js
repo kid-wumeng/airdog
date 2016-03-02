@@ -1,3 +1,6 @@
+"use strict"
+
+
 app.get('/read', async function(){
   let local = __dirname + '/_read.txt'
   this.body = await this.read(local)

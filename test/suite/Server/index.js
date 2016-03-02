@@ -1,4 +1,5 @@
-import request from 'request'
+"use strict"
+const request = require('request')
 let Server = Airdog.import('Server')
 
 

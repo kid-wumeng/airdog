@@ -1,3 +1,6 @@
+"use strict"
+
+
 app.get('/type', function(){
   this.type = 'application/airdog'
   this.body = this.res.type

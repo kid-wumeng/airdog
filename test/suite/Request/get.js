@@ -1,3 +1,6 @@
+"use strict"
+
+
 test('Get System-Header', function(done){
   client.get('/system-header', function(res, body){
     body.should.equal('127.0.0.1:8080')

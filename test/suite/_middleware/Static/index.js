@@ -1,8 +1,11 @@
-let fs = require('fs')
-let http = require('http')
-let zlib = require('zlib')
-let request = require('request')
-let Server = Airdog.import('Server')
+"use strict"
+
+
+const fs = require('fs')
+const http = require('http')
+const zlib = require('zlib')
+const request = require('request')
+const Server = Airdog.import('Server')
 
 
 

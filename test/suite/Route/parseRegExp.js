@@ -1,5 +1,5 @@
+"use strict"
 let Route = Airdog.import('Route')
-
 
 
 test('Parse Normal-Path', function(){

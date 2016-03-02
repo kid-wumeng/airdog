@@ -1,4 +1,5 @@
-import FS from 'fs'
+"use strict"
+const FS = require('fs')
 
 
 test('Parse File ( GET )', function(done)

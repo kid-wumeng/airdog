@@ -1,3 +1,4 @@
+"use strict"
 let Route = Airdog.import('Route')
 
 

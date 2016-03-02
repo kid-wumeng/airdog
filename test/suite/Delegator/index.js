@@ -1,3 +1,4 @@
+"use strict"
 let Delegator = Airdog.import('Delegator')
 
 

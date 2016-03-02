@@ -1,3 +1,6 @@
+"use strict"
+
+
 test('Parse JSON ( GET )', function(done){
   let json = { name: 'kid', age: 18 }
   let options = { json: json }

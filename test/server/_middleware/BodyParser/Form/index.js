@@ -1,3 +1,5 @@
+"use strict"
+
 app.get('/data', function(){
   this.body = this.data
 })

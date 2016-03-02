@@ -1,3 +1,6 @@
+"use strict"
+
+
 test('Get Status', function(done){
   client.get('/status', function(res, body){
     body.should.equal('306')

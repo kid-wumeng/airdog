@@ -1,3 +1,4 @@
+"use strict"
 let Middleware      = Airdog.import('Middleware')
 let MiddlewareQueue = Airdog.import('MiddlewareQueue')
 

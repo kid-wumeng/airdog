@@ -1,6 +1,6 @@
+"use strict"
 let Route = Airdog.import('Route')
 let RouteTable = Airdog.import('RouteTable')
-
 
 
 test('Match by Normal-Path with method ALL', function(done)

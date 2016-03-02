@@ -1,3 +1,4 @@
+"use strict"
 let Kit = Airdog.import('Kit')
 
 

@@ -1,3 +1,6 @@
+"use strict"
+
+
 test('Respond when this.body is String', function(done){
   client.get('/string', function(res, body){
     res.statusCode.should.equal(200)

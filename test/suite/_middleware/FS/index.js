@@ -1,3 +1,6 @@
+"use strict"
+
+
 test('Read File', function(done){
   client.get('/read', function(res, body){
     body.should.equal('hi, kid')

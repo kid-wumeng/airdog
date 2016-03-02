@@ -1,3 +1,6 @@
+"use strict"
+
+
 test('Parse Query', function(done){
   client.get('/data?name=kid&age=18', function(res, body){
     // @TODO support type-convert

@@ -1,3 +1,5 @@
+"use strict"
+
 app.get('/system-header', function(){
   this.body = this.get('host')
 })

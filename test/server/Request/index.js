@@ -1,3 +1,6 @@
+"use strict"
+
+
 app.get('/method-get', function(){
   this.body = this.method
 })
