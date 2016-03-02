@@ -1,6 +1,6 @@
 {
   "name": "airdog",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "test": "babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- --reporter spec"
   },
