@@ -75,6 +75,7 @@ addService('_middleware.BodyParser.File')
 app.listen(8080)
 
 
+runSuite('Airdog')
 runSuite('Middleware.run')
 runSuite('MiddlewareQueue.run')
 runSuite('Route.parseRegExp')

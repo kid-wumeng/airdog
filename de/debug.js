@@ -1,4 +1,4 @@
-let s = new Airdog()
+let s = new Airdog({})
 
 s.get('/', function(){
   this.body = '12345678'
