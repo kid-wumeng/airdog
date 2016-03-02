@@ -3,4 +3,4 @@ node_js: "5.1"
 branches:
   only: master
 before_install: npm install -g babel-cli
-after_success: coveralls
+after_script: "npm install coveralls && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
