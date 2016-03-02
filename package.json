@@ -2,7 +2,7 @@
   "name": "airdog",
   "version": "0.1.0",
   "scripts": {
-    "test": "babel-node ./node_modules/.bin/istanbul cover _mocha -- --reporter spec"
+    "test": "babel-node ./node_modules/.bin/babel-istanbul cover _mocha"
   },
   "babel": {
     "presets": [
@@ -15,8 +15,8 @@
     "babel-preset-stage-3": "~6.3.13"
   },
   "devDependencies": {
+    "babel-istanbul": "^0.6.1",
     "chai": "^3.4.1",
-    "istanbul": "~0.4.2",
     "request": "^2.67.0"
   }
 }
