@@ -2,4 +2,4 @@ language: node_js
 node_js: "5.1"
 branches:
   only: master
-before_install: npm install -g babel-cli
+install: npm install -g babel-cli
