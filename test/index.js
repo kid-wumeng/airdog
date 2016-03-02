@@ -1,21 +1,16 @@
 "use strict"
 
-require('babel-core/register')
-require('babel-polyfill')
 require('chai').should()
 
 let mocha = require('mocha')
 let request = require('request')
 const TEST_BASE = __dirname
 
-// global.suite = mocha.suite
-// global.test = mocha.test
 
 global.Airdog = require('../lib/Airdog')
 global.util = require('./asset/util')
 global.Flag = util.Flag
 global.clientBase = null
-
 
 
 global.runSuite = function(module){
