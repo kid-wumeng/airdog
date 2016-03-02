@@ -1,3 +1,1 @@
-require('babel-core/register')
-require('babel-polyfill')
-require('./lib/Airdog')
+module.exports = require('./lib/Airdog')
