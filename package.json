@@ -1,10 +1,19 @@
 {
   "name": "airdog",
   "version": "0.1.0",
+  "description": "A Web Framework base on NodeJS & ES2015 Async/Await",
+  "homepage": "https://github.com/KID-WuMeng/airdog",
   "author": {
     "name": "KID.WuMeng",
     "email": "kid.wumeng@gmail.com",
     "url": "https://github.com/KID-WuMeng"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KID-WuMeng/airdog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KID-WuMeng/airdog/issues"
   },
   "scripts": {
     "test": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter spec"
