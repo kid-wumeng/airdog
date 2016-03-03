@@ -2,5 +2,5 @@ require('babel-core/register')
 require('babel-polyfill')
 
 global.Airdog = require('../')
-global.client = require('request')
-require('./debug')
+global.request = require('request')
+require('./de')
