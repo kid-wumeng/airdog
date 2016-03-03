@@ -1,3 +1,8 @@
-![Travis CI](https://travis-ci.org/KID-WuMeng/airdog.svg?branch=master)
+Airdog
+---
 
-![Coverage Status](https://coveralls.io/repos/github/KID-WuMeng/airdog/badge.svg?branch=master)](https://coveralls.io/github/KID-WuMeng/airdog?branch=master)
+A Web Framework base on NodeJS & ES 2015 Async / Await
+
+![Travis CI](https://travis-ci.org/KID-WuMeng/airdog.svg?branch=master)
+![Coveralls](https://coveralls.io/repos/github/KID-WuMeng/airdog/badge.svg?branch=master)
+![NPM](https://david-dm.org/KID-WuMeng/airdog.svg)
