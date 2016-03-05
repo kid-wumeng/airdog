@@ -3,9 +3,9 @@
 let s = new Airdog({})
 
 s.get('/', function(){
-  // this.setCookie('name', 'kid', 100000000000000)
-  // this.setCookie('age', 18, 10000000000)
-  this.removeCookie()
+  // this.setCookie('name', 'kid', 100)
+  // this.setCookie('age', 18, 100)
+  // this.removeCookie()
   this.body = '12345678'
 })
 
@@ -29,3 +29,4 @@ j.setCookie(co4, 'http://127.0.0.1:8080/')
 // }, function(err, res, body){
 //   // s.close()
 // })
+
