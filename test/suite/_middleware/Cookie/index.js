@@ -21,7 +21,10 @@ test('Get Cookie', function(done){
       name: 'kid',
       age: '18'
     }))
-    done()
+    client.get('/get', function(res, body){
+      body.should.equal('{}')
+      done()
+    })
   })
 })
 
@@ -31,6 +34,7 @@ test('Set Cookie', function(done){
   client.get('/set', function(res, body){
     res.headers['set-cookie'][0].should.equal(`name=kid; expires=${body}; max-age=1000; path=/; domain=kid-wumeng.me; secure; httpOnly;`)
     res.headers['set-cookie'][1].should.equal('age=18; max-age=1000;')
+    res.headers['set-cookie'][2].should.equal('like-color=blue;')
     done()
   })
 })

@@ -2,7 +2,10 @@
 
 
 app.get('/get', async function(){
-  this.body = this.cookie
+  this.body = {
+    name: this.cookie.name,
+    age: this.cookie.age
+  }
 })
 
 
@@ -17,6 +20,7 @@ app.get('/set', async function(){
     httpOnly: true
   })
   this.setCookie('age', 18, 1000)
+  this.setCookie('like-color', 'blue')
   this.body = date.toUTCString()
 })
 
