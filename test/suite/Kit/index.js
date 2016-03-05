@@ -39,3 +39,12 @@ test('Merge ( no Src )', function(){
   dest.should.empty
   res.should.empty
 })
+
+
+
+test('Is Empty-Object', function(){
+  let o1 = {}
+  let o2 = { name: 'kid' }
+  Kit.isEmptyObject(o1).should.true
+  Kit.isEmptyObject(o2).should.false
+})
