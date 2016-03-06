@@ -19,7 +19,9 @@
     "test": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter spec"
   },
   "babel": {
-    "presets": ["stage-3"]
+    "presets": [
+      "stage-3"
+    ]
   },
   "dependencies": {
     "babel-core": "~6.3.26",
@@ -29,6 +31,7 @@
   "devDependencies": {
     "babel-istanbul": "^0.6.1",
     "chai": "^3.4.1",
+    "cookie": "^0.2.3",
     "mocha": "^2.4.5",
     "request": "^2.67.0"
   }
