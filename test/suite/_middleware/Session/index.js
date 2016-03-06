@@ -24,3 +24,21 @@ test('Get and Set Session', function(done){
     })
   })
 })
+
+
+test('Remove Session-Data', function(done){
+  client.get('/remove', function(res, body){
+    body.should.equal(JSON.stringify({
+      age: 18
+    }))
+    done()
+  })
+})
+
+
+test('Remove All Session-Data', function(done){
+  client.get('/remove-all', function(res, body){
+    body.should.equal('')
+    done()
+  })
+})

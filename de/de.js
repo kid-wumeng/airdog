@@ -6,8 +6,10 @@ s.get('/', function(){
   let username = this.session.username
   if(!username){
     this.session.username = 'kiddik'
+    this.session.age = 18
   }
-  this.body = 'hello, ' + username
+  this.removeSession('username')
+  this.body = this.session
 })
 
 s.listen(8080)
@@ -18,4 +20,3 @@ s.listen(8080)
 // }, function(err, res, body){
 //   // s.close()
 // })
-

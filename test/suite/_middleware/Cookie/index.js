@@ -52,7 +52,7 @@ test('Remove Cookie', function(done){
 
 
 
-test('Remove All-Cookies', function(done){
+test('Remove All Cookies', function(done){
   let co1 = request.cookie('name=kid')
   let co2 = request.cookie('age=18')
   
