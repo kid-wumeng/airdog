@@ -1,4 +1,5 @@
 "use strict"
+let Middleware = Airdog.import('Middleware')
 let Route = Airdog.import('Route')
 
 
@@ -8,7 +9,7 @@ test('Match by Normal-Path', function(done){
     arguments.length.should.equal(0)
     done()
   }
-  let route = new Route('/src/image/icon/logo.png/', fn)
+  let route = new Route('/src/image/icon/logo.png/', new Middleware(fn))
   let mid = route.match('/src/image/icon/logo.png/')
   mid.run({})
 })
@@ -20,7 +21,7 @@ test('Match by All-Path', function(done){
     arguments.length.should.equal(0)
     done()
   }
-  let route = new Route('*', fn)
+  let route = new Route('*', new Middleware(fn))
   let mid = route.match('/src/image/icon/logo.png/')
   mid.run({})
 })
@@ -32,7 +33,7 @@ test('Match by All-Path ( for Root )', function(done){
     arguments.length.should.equal(0)
     done()
   }
-  let route = new Route('*', fn)
+  let route = new Route('*', new Middleware(fn))
   let mid = route.match('/')
   mid.run({})
 })
@@ -46,7 +47,7 @@ test('Match by Mixed-Path', function(done){
     name.should.equal('logo.png')
     done()
   }
-  let route = new Route('/src/:type/*/:name/', fn)
+  let route = new Route('/src/:type/*/:name/', new Middleware(fn))
   let mid = route.match('/src/image/icon/logo.png/')
   mid.run({})
 })
@@ -55,7 +56,7 @@ test('Match by Mixed-Path', function(done){
 
 test('Match by Mixed-Path ( Not Matched )', function(){
   let fn = function(){}
-  let route = new Route('/src/:type/*/:name/', fn)
+  let route = new Route('/src/:type/*/:name/', new Middleware(fn))
   let mid = route.match('/res/image/icon/logo.png/')
   let flag = mid === null
   flag.should.true

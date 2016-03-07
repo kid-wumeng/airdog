@@ -27,8 +27,9 @@ test('Run Normal-Function with Context and Params', function(done){
     p2.should.equal('p2-value')
     done()
   }
-  let params = ['p1-value', 'p2-value']
-  new Middleware(fn, params).run({ name: 'kid' })
+  let mid = new Middleware(fn)
+  mid.params = ['p1-value', 'p2-value']
+  mid.run({ name: 'kid' })
 })
 
 
@@ -41,6 +42,7 @@ test('Run Async-Function with Context and Params', async function(done){
     p2.should.equal('p2-value')
     done()
   }
-  let params = ['p1-value', 'p2-value']
-  await new Middleware(fn, params).run({ name: 'kid' })
+  let mid = new Middleware(fn)
+  mid.params = ['p1-value', 'p2-value']
+  await mid.run({ name: 'kid' })
 })
