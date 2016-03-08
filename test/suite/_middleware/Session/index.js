@@ -55,7 +55,7 @@ test('Get and Set Session ( Timeout )', function(done){
         app.close()
         done()
       })
-    }, 20)
+    }, 100)
     
   })
 })

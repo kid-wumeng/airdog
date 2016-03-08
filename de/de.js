@@ -2,8 +2,8 @@
 
 let s = new Airdog({
   'session': {
-    'max-age': 10000,
-    'inspect-time': 10000
+    'max-age': 10000000,
+    'inspect-time': 10000000
   }
 })
 
@@ -13,8 +13,7 @@ s.get('/', function(){
     this.session.username = 'kiddik'
     this.session.age = 18
   }
-  this.removeSession()
-  this.body = this.session
+  this.body = username
 })
 
 
@@ -24,7 +23,7 @@ request.get({
   url: 'http://127.0.0.1:8080/'
 }, function(err, res, body){
   // console.log(body);
-  s.close()
+  // s.close()
 })
 
 
