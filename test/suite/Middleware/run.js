@@ -5,7 +5,7 @@ let Middleware = Airdog.import('Middleware')
 
 test('Run Normal-Function', function(done){
   let fn = function(){ done() }
-  new Middleware(fn).run()
+  new Middleware(fn).run({})
 })
 
 
@@ -15,7 +15,27 @@ test('Run Async-Function', async function(done){
     await util.sleep(1)
     done()
   }
-  await new Middleware(fn).run()
+  await new Middleware(fn).run({})
+})
+
+
+
+test('Run Normal-Function with Config', function(){
+  let fn = function(){
+    this.config.name.should.equal('kid')
+  }
+  new Middleware(fn, { name: 'kid' }).run({})
+})
+
+
+
+test('Run Async-Function with Config', async function(done){
+  let fn = async function(){
+    await util.sleep(1)
+    this.config.name.should.equal('kid')
+    done()
+  }
+  await new Middleware(fn, { name: 'kid' }).run({})
 })
 
 
