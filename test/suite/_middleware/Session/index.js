@@ -6,6 +6,7 @@ const request = require('request')
 
 test('Get and Set Session', function(done){
   client.get('/get-set', function(res, body){
+    res.headers['set-cookie'][0].should.include('HttpOnly')
     body.should.equal('')
 
     let co  = request.cookie(res.headers['set-cookie'][0])
