@@ -26,7 +26,8 @@
   "dependencies": {
     "babel-core": "~6.3.26",
     "babel-polyfill": "~6.3.14",
-    "babel-preset-stage-3": "~6.3.13"
+    "babel-preset-stage-3": "~6.3.13",
+    "hogan.js": "^3.0.2"
   },
   "devDependencies": {
     "babel-istanbul": "^0.6.1",

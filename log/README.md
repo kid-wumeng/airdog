@@ -6,10 +6,16 @@
 * [ new ] - Server: all, get, post, put, delete, use, listen, close
 * [ new ] - Request: url, protocol, host, hostname, port, path, type, get
 * [ new ] - Response: body, body=, status, status=, type, type=
-* [ new ] - Airdog.Send ( built-in )
-* [ new ] - Airdog.FS ( built-in )
-* [ new ] - Airdog.Static ( built-in )
-* [ new ] - Airdog.BodyParser.Form ( built-in )
-* [ new ] - Airdog.BodyParser.JSON ( built-in )
-* [ new ] - Airdog.BodyParser.File ( built-in )
+* [ new ] - middleware: Send
+* [ new ] - middleware: FS
+* [ new ] - middleware: Static
+* [ new ] - middleware: BodyParser.Form
+* [ new ] - middleware: BodyParser.JSON
+* [ new ] - middleware: BodyParser.File
 * [ new ] - Unit Test System
+
+
+# 0.2.0
+
+* [ new ] - middleware: Cookie
+* [ new ] - middleware: Session
