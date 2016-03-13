@@ -2,8 +2,8 @@
 
 let s = new Airdog({
   'render': {
-    'template-engine': 'hogan',
-    'template-directory': `${__dirname}/views`
+    'engine': 'hogan',
+    'dir': `${__dirname}/views`
   }
   // 'session': {
   //   'max-age': 10000000,

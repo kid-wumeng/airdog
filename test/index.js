@@ -51,7 +51,11 @@ global.client.del  = function(path, options, callback){ client.request('del',  p
 
 let Server = Airdog.import('Server')
 global.app = new Server({
-  static: `${__dirname}/server/_middleware/Static/`
+  'static': `${__dirname}/server/_middleware/Static/`,
+  'render': {
+    'engine': 'hogan',
+    'dir': `${__dirname}/server/_middleware/Render/`
+  }
 })
 
 
@@ -66,6 +70,7 @@ addService('_middleware.Session')
 addService('_middleware.BodyParser.Form')
 addService('_middleware.BodyParser.JSON')
 addService('_middleware.BodyParser.File')
+addService('_middleware.Render')
 
 
 app.listen(8080)
@@ -92,3 +97,4 @@ runSuite('_middleware.Session')
 runSuite('_middleware.BodyParser.Form')
 runSuite('_middleware.BodyParser.JSON')
 runSuite('_middleware.BodyParser.File')
+runSuite('_middleware.Render')
