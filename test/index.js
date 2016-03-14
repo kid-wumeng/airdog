@@ -53,7 +53,6 @@ let Server = Airdog.import('Server')
 global.app = new Server({
   'static': `${__dirname}/server/_middleware/Static/`,
   'render': {
-    'engine': 'hogan',
     'dir': `${__dirname}/server/_middleware/Render/`
   }
 })
