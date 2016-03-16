@@ -21,7 +21,7 @@ let s = new Airdog({
 // })
 
 
-s.get('*').use(Airdog.CORS, {
+s.get('*', Airdog.CORS, {
   'allow-origin': ['http://127.0.0.1:8081', 'http://127.0.0.1:8082']
 })
 s.get('/', function(){
