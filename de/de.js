@@ -21,6 +21,9 @@ let s = new Airdog({
 // })
 
 
+s.get('*').use(Airdog.CORS, {
+  'allow-origin': ['http://127.0.0.1:8081', 'http://127.0.0.1:8082']
+})
 s.get('/', function(){
   this.render('index.html', {'name': 'wumeng'})
 })
@@ -28,11 +31,11 @@ s.get('/', function(){
 
 s.listen(8080)
 
-request.get({
-  url: 'http://127.0.0.1:8080/'
-}, function(err, res, body){
-  console.log(body);
-  s.close()
-})
+// request.get({
+//   url: 'http://127.0.0.1:8080/'
+// }, function(err, res, body){
+//   // console.log(body);
+//   // s.close()
+// })
 
 
