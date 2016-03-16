@@ -71,6 +71,8 @@ addService('_middleware.BodyParser.JSON')
 addService('_middleware.BodyParser.File')
 addService('_middleware.Render')
 
+addService('_middleware.CORS')
+
 
 app.listen(8080)
 
@@ -97,3 +99,5 @@ runSuite('_middleware.BodyParser.Form')
 runSuite('_middleware.BodyParser.JSON')
 runSuite('_middleware.BodyParser.File')
 runSuite('_middleware.Render')
+
+runSuite('_middleware.CORS')
