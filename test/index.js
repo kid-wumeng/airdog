@@ -3,10 +3,10 @@
 require('chai').should()
 
 let mocha = require('mocha')
-let request = require('request')
 const TEST_BASE = __dirname
 
 
+global.request = require('request')
 global.Airdog = require('../lib/Airdog')
 global.util = require('./asset/util')
 global.Flag = util.Flag
@@ -101,3 +101,4 @@ runSuite('_middleware.BodyParser.File')
 runSuite('_middleware.Render')
 
 runSuite('_middleware.CORS')
+runSuite('_middleware.Mock')

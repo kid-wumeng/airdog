@@ -1,6 +1,7 @@
 "use strict"
 
 let s = new Airdog({
+  'debug': true,
   'render': {
     'engine': 'hogan',
     'dir': `${__dirname}/views`
@@ -24,18 +25,22 @@ let s = new Airdog({
 s.get('*', Airdog.CORS, {
   'allow-origin': ['http://127.0.0.1:8081/', 'http://127.0.0.1:8082/']
 })
-s.get('/', function(){
+s.get('*', Airdog.Mock, {
+  'dir': __dirname + '/mocks'
+})
+s.get('/user/:id/profile', function(){
   this.render('index.html', {'name': 'wumeng'})
 })
 
 
 s.listen(8080)
 
-// request.get({
-//   url: 'http://127.0.0.1:8080/'
-// }, function(err, res, body){
-//   // console.log(body);
-//   // s.close()
-// })
+request.get({
+  url: 'http://127.0.0.1:8080/user/12/profile'
+}, function(err, res, body){
+  console.log(res.statusCode)
+  console.log(body);
+  s.close()
+})
 
 
