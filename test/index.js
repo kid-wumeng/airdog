@@ -51,7 +51,9 @@ global.client.del  = function(path, options, callback){ client.request('del',  p
 
 let Server = Airdog.import('Server')
 global.app = new Server({
-  'static': `${__dirname}/server/_middleware/Static/`,
+  'static': {
+    'dir': `${__dirname}/server/_middleware/Static/`
+  },
   'render': {
     'dir': `${__dirname}/server/_middleware/Render/`
   }
