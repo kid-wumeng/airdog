@@ -4,9 +4,7 @@
 const fs = require('fs')
 const http = require('http')
 const zlib = require('zlib')
-const request = require('request')
 const Server = Airdog.import('Server')
-
 
 
 test('Get HTML', function(done){

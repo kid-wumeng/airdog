@@ -1,5 +1,5 @@
 "use strict"
-const request = require('request')
+
 
 test('Create Airdog', function(){
   let app = new Airdog()

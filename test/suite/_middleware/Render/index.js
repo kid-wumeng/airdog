@@ -1,5 +1,4 @@
 "use strict"
-const request = require('request')
 
 
 test('Render HTML', function(done){
