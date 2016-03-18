@@ -55,7 +55,7 @@ global.app = new Server({
     'dir': `${__dirname}/server/_middleware/Static/`
   },
   'render': {
-    'dir': `${__dirname}/server/_middleware/Render/`
+    'dir': `${__dirname}/server/_middleware/Render/_views`
   }
 })
 

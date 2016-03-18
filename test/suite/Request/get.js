@@ -55,7 +55,7 @@ test('Get Custom-Header ( Ignore Case )', function(done){
 
 
 
-test('Get Custom-Header ( no Exist )', function(done){
+test('Get Custom-Header ( no exist )', function(done){
   client.get('/custom-header', function(res, body){
     body.should.equal('null')
     done()

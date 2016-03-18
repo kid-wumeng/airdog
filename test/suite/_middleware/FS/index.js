@@ -31,7 +31,7 @@ test('Is File', function(done){
 
 
 
-test('Is File ( no Exist )', function(done){
+test('Is File ( no exist )', function(done){
   client.get('/isFile-noExist', function(res, body){
     body.should.equal('false')
     done()
@@ -49,7 +49,7 @@ test('Is Dir', function(done){
 
 
 
-test('Is Dir ( no Exist )', function(done){
+test('Is Dir ( no exist )', function(done){
   client.get('/isDir-noExist', function(res, body){
     body.should.equal('false')
     done()

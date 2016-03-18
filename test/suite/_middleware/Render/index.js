@@ -29,11 +29,11 @@ test('Render HTML ( dir is Engine-Object )', function(done){
   let app = new Airdog({
     'render': {
       'engine': engine,
-      'dir': __dirname
+      'dir': __dirname + '/_views'
     }
   })
   app.get('/', function(){
-    this.render('_user/_account/login.html', 'kid')
+    this.render('user/account/login.html', 'kid')
   })
   app.listen(8081)
   
@@ -43,12 +43,3 @@ test('Render HTML ( dir is Engine-Object )', function(done){
     app.close()
   })
 })
-
-
-
-// test('Render HTML', function(done){
-//   client.get('/login', function(res, body){
-//     body.should.equal('hi, kid')
-//     done()
-//   })
-// })
