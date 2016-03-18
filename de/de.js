@@ -22,9 +22,9 @@ let s = new Airdog({
 // })
 
 
-s.get('*', Airdog.CORS, {
-  'allow-origin': ['http://127.0.0.1:8081/', 'http://127.0.0.1:8082/']
-})
+// s.get('*', Airdog.CORS, {
+//   'allow-origin': ['http://127.0.0.1:8081/', 'http://127.0.0.1:8082/']
+// })
 s.get('*', Airdog.Mock, {
   'dir': __dirname + '/mocks'
 })
@@ -38,9 +38,18 @@ s.listen(8080)
 request.get({
   url: 'http://127.0.0.1:8080/user/12/profile'
 }, function(err, res, body){
-  console.log(res.statusCode)
-  console.log(body);
   s.close()
 })
 
 
+const EventEmitter = require('events').EventEmitter
+class ABC extends EventEmitter {
+  
+}
+
+let abc = new ABC()
+abc.on('en', function(a, b){
+  console.log('enen', a, b);
+})
+
+abc.emit('en', 'wu', 'meng')
