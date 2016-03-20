@@ -40,6 +40,50 @@ test('Get Mock', function(done){
 })
 
 
+test('Get Mock ( Config in new Airdog )', function(done){
+  let app = new Airdog({
+    'debug': true,
+    'mock': {
+      'dir': __dirname + '/_mocks'
+    }
+  })
+  app.get('/user/:id/profile', Airdog.Mock)
+  app.get('/user/:id/profile', function(){
+    this.body = 'ok'
+  })
+  app.listen(8081)
+  
+  request.get('http://127.0.0.1:8081/user/12/profile', function(err, res, body){
+    res.statusCode.should.equal(200)
+    body.should.equal(JSON.stringify({
+      name: 'kid',
+      age: 18
+    }))
+    done()
+    app.close()
+  })
+})
+
+
+test('Get Mock ( no Config )', function(done){
+  let app = new Airdog({
+    'debug': true
+  })
+  app.get('/user/:id/profile', Airdog.Mock)
+  app.get('/user/:id/profile', function(){
+    this.body = 'ok'
+  })
+  app.listen(8081)
+  
+  request.get('http://127.0.0.1:8081/user/12/profile', function(err, res, body){
+    res.statusCode.should.equal(404)
+    body.should.equal('')
+    done()
+    app.close()
+  })
+})
+
+
 test('Get Mock ( no exist )', function(done){
   let app = new Airdog({
     'debug': true
