@@ -5,6 +5,9 @@ let s = new Airdog({
   'render': {
     'engine': 'hogan',
     'dir': `${__dirname}/views`
+  },
+  'mock': {
+    'dir': __dirname + '/mocks'
   }
   // 'session': {
   //   'max-age': 10000000,
@@ -25,9 +28,7 @@ let s = new Airdog({
 // s.get('*', Airdog.CORS, {
 //   'allow-origin': ['http://127.0.0.1:8081/', 'http://127.0.0.1:8082/']
 // })
-s.get('*', Airdog.Mock, {
-  'dir': __dirname + '/mocks'
-})
+s.get('*', Airdog.Mock)
 s.get('/user/:id/profile', function(){
   this.render('index.html', {'name': 'wumeng'})
 })
@@ -38,18 +39,6 @@ s.listen(8080)
 request.get({
   url: 'http://127.0.0.1:8080/user/12/profile'
 }, function(err, res, body){
+  console.log(body);
   s.close()
 })
-
-
-const EventEmitter = require('events').EventEmitter
-class ABC extends EventEmitter {
-  
-}
-
-let abc = new ABC()
-abc.on('en', function(a, b){
-  console.log('enen', a, b);
-})
-
-abc.emit('en', 'wu', 'meng')
