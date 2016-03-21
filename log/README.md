@@ -19,3 +19,9 @@
 
 * [ new ] - middleware: Cookie
 * [ new ] - middleware: Session
+* [ new ] - Render
+* [ new ] - Template: hogan
+* [ new ] - CORS
+* [ new ] - Mock
+* [ add ] - The config for middleware
+* [ add ] - Event: appCreate, appClose, init
