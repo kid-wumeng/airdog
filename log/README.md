@@ -6,12 +6,12 @@
 * [ new ] - Server: all, get, post, put, delete, use, listen, close
 * [ new ] - Request: url, protocol, host, hostname, port, path, type, get
 * [ new ] - Response: body, body=, status, status=, type, type=
-* [ new ] - middleware: Send
-* [ new ] - middleware: FS
-* [ new ] - middleware: Static
-* [ new ] - middleware: BodyParser.Form
-* [ new ] - middleware: BodyParser.JSON
-* [ new ] - middleware: BodyParser.File
+* [ new ] - Middleware: Send
+* [ new ] - Middleware: FS
+* [ new ] - Middleware: Static
+* [ new ] - Middleware: BodyParser.Form
+* [ new ] - Middleware: BodyParser.JSON
+* [ new ] - Middleware: BodyParser.File
 * [ new ] - Unit Test System
 
 
@@ -23,5 +23,5 @@
 * [ new ] - Template: hogan
 * [ new ] - CORS
 * [ new ] - Mock
-* [ add ] - The config for middleware
+* [ add ] - Configurable Middleware
 * [ add ] - Event: appCreate, appClose, init
