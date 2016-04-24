@@ -25,3 +25,6 @@
 * [ new ] - Mock
 * [ add ] - Configurable Middleware
 * [ add ] - Event: appCreate, appClose, init
+* 0.2.1
+  * Fixed the bug about the content-length of response is wrong when the body is multibyte string ( such as Chinese )
+  * 

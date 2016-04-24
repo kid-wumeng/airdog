@@ -27,7 +27,7 @@ app.get('/set', async function(){
 
 app.get('/remove', async function(){
   this.removeCookie('name')
-  this.removeCookie('age')
+  this.removeCookie('age', {'path': '/user'})
   this.body = 'ok'
 })
 
@@ -35,5 +35,12 @@ app.get('/remove', async function(){
 app.get('/remove-all', async function(){
   this.setCookie('id', '12', 1000)
   this.removeCookie()
+  this.body = 'ok'
+})
+
+
+app.get('/remove-all-op', async function(){
+  this.setCookie('id', '12', 1000)
+  this.removeCookie({'path': '/user'})
   this.body = 'ok'
 })
