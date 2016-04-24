@@ -50,3 +50,8 @@ app.get('/false', function(){
 app.get('/number', function(){
   this.body = 12
 })
+
+
+app.get('/chinese', function(){
+  this.body = '中文'
+})

@@ -117,3 +117,14 @@ test('Respond when this.body is number', function(done){
     done()
   })
 })
+
+
+test('Respond when this.body is Chinese', function(done){
+  client.get('/chinese', function(res, body){
+    res.statusCode.should.equal(200)
+    res.headers['content-type'].should.equal('text/plain')
+    res.headers['content-length'].should.equal('6')
+    body.should.equal('中文')
+    done()
+  })
+})
