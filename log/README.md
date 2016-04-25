@@ -27,4 +27,5 @@
 * [ add ] - Event: appCreate, appClose, init
 * 0.2.1
   * Fixed the bug about the content-length of response is wrong when the body is multibyte string ( such as Chinese )
+  * To support the options of this.removeCookie
   * 
