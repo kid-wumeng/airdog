@@ -29,4 +29,4 @@
   * [ add ] The options of this.removeCookie
   * [ fix ] The content-length of response is wrong when the body is multibyte string ( such as Chinese )
   * [ fix ] The consecutive line-break when parse the file-data
-  * [ fix ] The join of buffer
+  * [ fix ] The join of buffer when handle the data of request
