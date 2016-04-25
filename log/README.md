@@ -26,6 +26,7 @@
 * [ add ] - Configurable Middleware
 * [ add ] - Event: appCreate, appClose, init
 * 0.2.1
-  * Fixed the bug about the content-length of response is wrong when the body is multibyte string ( such as Chinese )
-  * To support the options of this.removeCookie
-  * 
+  * [ add ] The options of this.removeCookie
+  * [ fix ] The content-length of response is wrong when the body is multibyte string ( such as Chinese )
+  * [ fix ] The consecutive line-break when parse the file-data
+  * [ fix ] The join of buffer
