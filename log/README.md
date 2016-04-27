@@ -31,5 +31,6 @@
   * [ fix ] The consecutive line-break when parse the file-data
   * [ fix ] The join of buffer when handle the data of request
 * 0.2.2
- * [ fix ] The route-match error in windows
- * [ fix ] The render error in windows
+ * [ fix ] The error of route-match in windows
+ * [ fix ] The error of render in windows
+ * [ fix ] The error of static-file cache in windows
