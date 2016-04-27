@@ -30,3 +30,6 @@
   * [ fix ] The content-length of response is wrong when the body is multibyte string ( such as Chinese )
   * [ fix ] The consecutive line-break when parse the file-data
   * [ fix ] The join of buffer when handle the data of request
+* 0.2.2
+ * [ fix ] The route-match error in windows
+ * [ fix ] The render error in windows
