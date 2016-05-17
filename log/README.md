@@ -34,3 +34,6 @@
  * [ fix ] The error of route-match in windows
  * [ fix ] The error of render in windows
  * [ fix ] The error of static-file cache in windows
+* 0.2.3
+  * [ fix ] The error of render in windows
+  * [ fix ] Support the config in all | post | put | del
