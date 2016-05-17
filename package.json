@@ -1,6 +1,6 @@
 {
   "name": "airdog",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A Web Framework base on NodeJS & ES2015 Async/Await",
   "homepage": "https://github.com/KID-WuMeng/airdog",
   "author": {
