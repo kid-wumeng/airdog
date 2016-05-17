@@ -13,6 +13,9 @@ app.put('/method-put', function(){
 app.del('/method-del', function(){
   this.body = this.method
 })
+app.options('/method-options', function(){
+  this.body = this.method
+})
 
 
 

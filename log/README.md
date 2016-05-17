@@ -37,3 +37,4 @@
 * 0.2.3
   * [ fix ] The error of render in windows
   * [ fix ] Support the config in all | post | put | del
+  * [ add ] Server: options

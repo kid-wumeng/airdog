@@ -37,16 +37,18 @@ global.client.request = function(method, path, options, callback){
     callback = options
     options = {}
   }
+  options.method = method
   options.url = `http://127.0.0.1:8080/${clientBase}${path}`
-  request[method](options, function(err, res, body){
+  request(options, function(err, res, body){
     callback(res, body)
   })
 }
 
-global.client.get  = function(path, options, callback){ client.request('get',  path, options, callback) }
-global.client.post = function(path, options, callback){ client.request('post', path, options, callback) }
-global.client.put  = function(path, options, callback){ client.request('put',  path, options, callback) }
-global.client.del  = function(path, options, callback){ client.request('del',  path, options, callback) }
+global.client.get  = function(path, options, callback){ client.request('GET',  path, options, callback) }
+global.client.post = function(path, options, callback){ client.request('POST', path, options, callback) }
+global.client.put  = function(path, options, callback){ client.request('PUT',  path, options, callback) }
+global.client.del  = function(path, options, callback){ client.request('DELETE',  path, options, callback) }
+global.client.options = function(path, options, callback){ client.request('OPTIONS',  path, options, callback) }
 
 
 let Server = Airdog.import('Server')

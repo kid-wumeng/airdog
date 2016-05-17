@@ -26,6 +26,12 @@ test('Get Method-DELETE', function(done){
     done()
   })
 })
+test('Get method-OPTIONS', function(done){
+  client.options('/method-options', function(res, body){
+    body.should.equal('OPTIONS')
+    done()
+  })
+})
 
 
 
