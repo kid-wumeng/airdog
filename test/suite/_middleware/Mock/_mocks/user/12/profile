@@ -1,4 +1,0 @@
-exports.data = {
-  name: 'kid',
-  age: 18
-}

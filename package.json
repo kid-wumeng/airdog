@@ -1,7 +1,7 @@
 {
   "name": "airdog",
-  "version": "0.2.3",
-  "description": "A Web Framework base on NodeJS & ES2015 Async/Await",
+  "version": "0.3",
+  "description": "A Web Framework for NodeJS",
   "homepage": "https://github.com/KID-WuMeng/airdog",
   "author": {
     "name": "KID.WuMeng",
@@ -15,25 +15,4 @@
   "bugs": {
     "url": "https://github.com/KID-WuMeng/airdog/issues"
   },
-  "scripts": {
-    "test": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter spec"
-  },
-  "babel": {
-    "presets": [
-      "stage-3"
-    ]
-  },
-  "dependencies": {
-    "babel-core": "~6.3.26",
-    "babel-polyfill": "~6.3.14",
-    "babel-preset-stage-3": "~6.3.13",
-    "hogan.js": "^3.0.2"
-  },
-  "devDependencies": {
-    "babel-istanbul": "^0.6.1",
-    "chai": "^3.4.1",
-    "cookie": "^0.2.3",
-    "mocha": "^2.4.5",
-    "request": "^2.67.0"
-  }
 }
