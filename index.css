@@ -1,0 +1,19 @@
+list {user in users}
+  item key={user.id}
+    name {user.name}
+
+
+list {
+  @open? {
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+module.exports = class {
+  open = false,
+  open(){
+
+  }
+}
