@@ -15,4 +15,7 @@
   "bugs": {
     "url": "https://github.com/KID-WuMeng/airdog/issues"
   },
+  "dependencies": {
+    "socket.io": "^1.4.6"
+  }
 }
