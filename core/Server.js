@@ -1,26 +1,53 @@
-var http = require('http')
-var io = require('socket.io')
+const http = require('http')
+const koa = require('koa')
+const router = require('koa-router')
+const io = require('socket.io')
 
-module.exports = class {
 
-  constructor(){
-    this.http = http.createServer()
-    this.io = io(this.http)
-    this.events = []
+class Server {
+
+  constructor(op){
+    this.app = koa()
+    this.router = router()
+    this.io = null
+    this.wsEvents = []
   }
 
-  on(name, callback){
-    this.events.push({name, callback})
+
+  get(path, mid){
+    this.router.get(path, mid)
   }
 
-  listen(port, callback){
-    this.io.on('connection', (socket)=>{
-      this.events.forEach((event)=>{
-        socket.on(event.name, function(){
-          event.callback.apply({socket}, arguments)
-        })
+
+  addWSEvent(name, callback){
+    this.wsEvents.push({name, callback})
+  }
+
+
+  listen(port){
+    // Bind all HTTP routes
+    this.app.use(this.router.routes())
+
+    // To support Web-Socket
+    let server = http.createServer(this.app.callback())
+    this.io = io(server)
+
+    // Bind all Web-Socket events
+    this.io.on('connection', this.bindWSEvents.bind(this))
+
+    // Notice, socket.io need a node-server ( not koa-app ) to listen
+    server.listen(port)
+  }
+
+
+  bindWSEvents(socket){
+    this.wsEvents.forEach((event)=>{
+      socket.on(event.name, function(){
+        event.callback.apply({socket}, arguments)
       })
     })
-    this.http.listen(port, callback)
   }
 }
+
+
+module.exports = Server
