@@ -1,6 +1,6 @@
 import FileManager from './FileManager'
 import ModuleManager from './ModuleManager'
-import ActiveRecord from '../ActiveRecord.server'
+import * as store from '../store'
 
 global.$model = {}
 
@@ -17,25 +17,32 @@ let modelPaths = modelFileManager.getAllFilePaths()
 // Init model modules
 let modelManager = new ModuleManager()
 modelManager.saveManyModules(modelPaths)
-modelManager.forEach((name, model)=>{
-  $model[name] = ModuleManager.combineModule(name, [ActiveRecord, model.common, model.server])
+modelManager.forEach((name, modelGroup)=>{
+  $model[name] = createModel(name, modelGroup)
 })
 
 modelFileManager.on('addFile', (file)=>{
-  let [name, model] = modelManager.saveModule(file.path)
-  $model[name] = ModuleManager.combineModule(name, [ActiveRecord, model.common, model.server])
+  let [name, modelGroup] = modelManager.saveModule(file.path)
+  $model[name] = createModel(name, modelGroup)
 })
 
 modelFileManager.on('updateFile', (file)=>{
-  let [name, model] = modelManager.saveModule(file.path)
-  $model[name] = ModuleManager.combineModule(name, [ActiveRecord, model.common, model.server])
+  let [name, modelGroup] = modelManager.saveModule(file.path)
+  $model[name] = createModel(name, modelGroup)
 })
 
 modelFileManager.on('deleteFile', (file)=>{
-  let [name, model] = modelManager.deleteModule(file.path)
-  if(model.common || model.server){
-    $model[name] = ModuleManager.combineModule(name, [ActiveRecord, model.common, model.server])
+  let [name, modelGroup] = modelManager.deleteModule(file.path)
+  if(modelGroup.common || modelGroup.server){
+    $model[name] = createModel(name, modelGroup)
   }else{
     $model[name] = undefined
   }
 })
+
+
+function createModel(name, modelGroup){
+  let Model = ModuleManager.combineModule(name, [store.ActiveRecord, modelGroup.common, modelGroup.server])
+  Model._collection = store.createDriver(Model)
+  return Model
+}
