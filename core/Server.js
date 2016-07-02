@@ -1,16 +1,25 @@
 const http = require('http')
 const koa = require('koa')
 const router = require('koa-router')
+const render = require('koa-ejs')
 const io = require('socket.io')
 
 
-class Server {
+export default class Server {
 
   constructor(op){
     this.app = koa()
     this.router = router()
     this.io = null
     this.wsEvents = []
+
+    render(this.app, {
+      root: `${AIRDOG_DIR}/core/client`,
+      layout: false,
+      viewExt: 'html',
+      cache: false,
+      debug: true
+    })
   }
 
 
@@ -36,7 +45,9 @@ class Server {
     this.io.on('connection', this.bindWSEvents.bind(this))
 
     // Notice, socket.io need a node-server ( not koa-app ) to listen
-    server.listen(port)
+    server.listen(port, ()=>{
+      console.log('start server');
+    })
   }
 
 
@@ -48,6 +59,3 @@ class Server {
     })
   }
 }
-
-
-module.exports = Server

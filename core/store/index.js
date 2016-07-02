@@ -12,13 +12,13 @@ export async function init(){
 
 
 export function createDriver(Model){
-  if($util.is(Model.schema, 'nil')){
-    $error(`$model.${Model.name}.schema not found`)
-  }
-  // @TODO object -> plain-object
-  if(!$util.is(Model.schema, 'object')){
-    $error(`$model.${Model.name}.schema is't a plain-object`)
-  }
+  // if($util.is(Model.schema, 'nil')){
+  //   $error(`$model.${Model.name}.schema not found`)
+  // }
+  // // @TODO object -> plain-object
+  // if(!$util.is(Model.schema, 'object')){
+  //   $error(`$model.${Model.name}.schema is't a plain-object`)
+  // }
   let dbName = null || 'default'
   let colName = Model.name
   let db = dbDict['default']
