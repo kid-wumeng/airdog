@@ -59,7 +59,8 @@ export function merge(dest, src)
 
 export function createClass(name, modules)
 {
-  let Class = function(){}
+  eval(`var Class = function ${name}(){}`)
+  console.log(Class);
   Object.defineProperty(Class, 'name', {
     value: name
   })

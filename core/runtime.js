@@ -19,34 +19,35 @@ import Server from './Server'
   await store.init()
 
 
+  require('./ready')
   require('./module/util.server')
   require('./module/model.server')
 
 
   var compiler = webpack({
-    entry: ['babel-polyfill', `${AIRDOG_DIR}/core/runtime.client`],
+    entry: [`${AIRDOG_DIR}/core/runtime.client`],
     output: {
-      path: `${AIRDOG_DIR}/build`,
+      path: `${RUNTIME_DIR}/build`,
       name: 'bundle.js',
     },
     resolve: {
-      'alias': {
-        AIRDOG_DIR: `${AIRDOG_DIR}`,
-        PROJECT_DIR: `${PROJECT_DIR}`,
-      }
+      alias: {
+        AIRDOG_DIR:  AIRDOG_DIR,
+        RUNTIME_DIR: RUNTIME_DIR,
+      },
+    },
+    resolveLoader: {
+      root: `${AIRDOG_DIR}/node_modules`,
     },
     module: {
       loaders: [
         {
           test: /\.js$/,
-          include: [
-            `${AIRDOG_DIR}`,
-            `${PROJECT_DIR}/model`,
-          ],
           loader: 'babel',
           query: {
-            presets: ['es2015'],
+            presets: ['es2015-without-strict'],
             plugins: [
+              //  @REVIEW .default
               'transform-decorators-legacy',
               'add-module-exports',
               'transform-async-to-generator',
@@ -61,7 +62,7 @@ import Server from './Server'
 
   compiler.run(function(err, stat) {
     console.log(stat.compilation.fileDependencies);
-    let bundle = fs.readFileSync(`${AIRDOG_DIR}/build/bundle.js`)
+    let bundle = fs.readFileSync(`${RUNTIME_DIR}/build/bundle.js`)
 
     let server = new Server()
     server.get('/', function*(){
@@ -69,13 +70,6 @@ import Server from './Server'
     })
     server.listen(3000)
   })
-
-
-
-
-
-
-
 
 
 })()

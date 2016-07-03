@@ -43,6 +43,6 @@ modelFileManager.on('deleteFile', (file)=>{
 
 function createModel(name, modelGroup){
   let Model = ModuleManager.combineModule(name, [store.ActiveRecord, modelGroup.common, modelGroup.server])
-  Model._collection = store.createDriver(Model)
+  Model._driver = store.createDriver(Model)
   return Model
 }

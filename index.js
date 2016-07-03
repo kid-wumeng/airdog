@@ -12,6 +12,7 @@ require('babel-register')({
 
 global.AIRDOG_DIR =  __dirname
 global.PROJECT_DIR = process.cwd()
+global.RUNTIME_DIR = `${AIRDOG_DIR}/project/default`
 
 require('./core/runtime')
 
