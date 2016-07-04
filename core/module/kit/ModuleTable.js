@@ -1,6 +1,5 @@
 export default class ModuleTable {
 
-
   /*
   * A table seen like as:
   * {
@@ -22,7 +21,6 @@ export default class ModuleTable {
 
 
 
-
   /**
   * Save module ( create or update )
   * @param (string) name - such as "User"
@@ -39,7 +37,6 @@ export default class ModuleTable {
 
 
 
-
   /**
   * Delete module
   * @param (string) name - such as "User"
@@ -49,7 +46,6 @@ export default class ModuleTable {
   del(name, type){
     this.table[name][type] = undefined
   }
-
 
 
 

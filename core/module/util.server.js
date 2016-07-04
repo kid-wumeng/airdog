@@ -1,4 +1,4 @@
-import FileManager from './FileManager'
+import FileManager from './kit/FileManager'
 
 export function init(){
   global.$util = {}

@@ -1,7 +1,7 @@
-import FileManager from './FileManager'
-import ModuleTable from './ModuleTable'
+import FileManager from './kit/FileManager'
+import ModuleTable from './kit/ModuleTable'
 import ActiveRecord from '../store/ActiveRecord.server'
-import * as toolkit from './toolkit'
+import * as kit from './kit'
 import * as database from '../store/database.server'
 
 global.$model = {}
@@ -18,13 +18,13 @@ export function init(){
 
   let moduleTable = new ModuleTable()
   modulePaths.forEach(path=>{
-    let {name, type} = toolkit.moduleInfo(path)
+    let {name, type} = kit.moduleInfo(path)
     let module = require(path)
     moduleTable.save(name, type, module)
   })
 
   moduleTable.forEach((name, module)=>{
-    $model[name] = toolkit.createClass(name, [ActiveRecord, module.common, module.client])
+    $model[name] = kit.createClass(name, [ActiveRecord, module.common, module.client])
     database.setDriver($model[name])
   })
 }
