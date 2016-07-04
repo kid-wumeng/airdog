@@ -2,7 +2,8 @@ import FileManager from './kit/FileManager'
 import ModuleTable from './kit/ModuleTable'
 import ActiveRecord from '../store/ActiveRecord.server'
 import * as kit from './kit'
-import * as database from '../store/database.server'
+import Collection from '../store/driver.MongoDB/Collection'
+
 
 global.$model = {}
 
@@ -25,6 +26,13 @@ export function init(){
 
   moduleTable.forEach((name, module)=>{
     $model[name] = kit.createClass(name, [ActiveRecord, module.common, module.client])
-    database.setDriver($model[name])
+    initDriver($model[name])
   })
+}
+
+
+function initDriver(Model){
+  let dname = 'default'
+  let cname = Model.name
+  Model._driver = new Collection(dname, cname)
 }

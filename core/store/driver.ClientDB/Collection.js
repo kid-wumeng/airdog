@@ -30,7 +30,7 @@ export default class Collection {
     }
     // @TODO -> plain-object
     if(!$util.is(query, 'object') || $util.is(query, 'array')){
-      $error('find failed, the param `query` should be a plain-object')
+      throw 'find failed, the param `query` should be a plain-object'
     }
     let i, record
     for(i = 0; i < this.records.length; i++){
