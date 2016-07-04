@@ -9,6 +9,7 @@ import webpack from 'webpack'
   global.RUNTIME_DIR = `${AIRDOG_DIR}/project/default`
 
 
+  fs.copySync(`${PROJECT_DIR}/config`, `${RUNTIME_DIR}/config`)
   fs.copySync(`${PROJECT_DIR}/model`, `${RUNTIME_DIR}/model`)
 
 

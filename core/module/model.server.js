@@ -5,8 +5,6 @@ import * as kit from './kit'
 import Collection from '../store/driver.MongoDB/Collection'
 
 
-global.$model = {}
-
 export function init(){
   let fileManager = new FileManager({
     root: `${PROJECT_DIR}/model`,

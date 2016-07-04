@@ -1,13 +1,19 @@
 import fs from 'fs'
 import * as store from './store'
+import * as config from './module/config.server'
 import * as util from './module/util.server'
 import * as model from './module/model.server'
-import Server from './Server'
+import Server from './net/Server'
 
 ;(async()=>{try{
 
 
+  global.$config = {}
+  global.$util = {}
+  global.$model = {}
+
   await store.init()
+  config.init()
   util.init()
   model.init()
 
