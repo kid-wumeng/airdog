@@ -1,4 +1,4 @@
-export default class ModuleManager {
+export default class ModuleTable {
 
 
   /*
@@ -63,5 +63,5 @@ export default class ModuleManager {
       callback(name, this.table[name])
     }
   }
-  
+
 }

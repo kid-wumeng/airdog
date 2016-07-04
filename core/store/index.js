@@ -1,29 +1,8 @@
-import ActiveRecord from './ActiveRecord'
-
-let dbDict = {}
-
+import { MongoClient } from 'mongodb'
 
 export async function init(){
-  let DB = require('./driver.MongoDB/DB')
-  let db = new DB()
-  await db.connect()
-  dbDict.default = db
+  global.$database = {}
+  if(!$database['default']){
+    $database['default'] = await MongoClient.connect('mongodb://localhost:27017/test')
+  }
 }
-
-
-export function createDriver(Model){
-  // if($util.is(Model.schema, 'nil')){
-  //   $error(`$model.${Model.name}.schema not found`)
-  // }
-  // // @TODO object -> plain-object
-  // if(!$util.is(Model.schema, 'object')){
-  //   $error(`$model.${Model.name}.schema is't a plain-object`)
-  // }
-  let dbName = null || 'default'
-  let colName = Model.name
-  let db = dbDict['default']
-  return db.use(colName)
-}
-
-
-export { ActiveRecord }

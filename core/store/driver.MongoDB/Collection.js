@@ -1,26 +1,24 @@
-import mongodb from 'mongodb'
-
 export default class Collection {
 
-  constructor(db, colName){
-    this.collection = db.collection(colName)
+  constructor(dname, cname){
+    this.records = $database[dname].collection(cname)
   }
 
 
   async find(query){
-    return await this.collection.findOne(query)
+    return await this.records.findOne(query)
   }
 
 
   async findAll(query){
-    return await this.collection.find(query)
+    return await this.records.find(query)
   }
 
 
   async add(record){
     let result = {}
     try{
-      await this.collection.insert(record)
+      await this.records.insert(record)
       result.ok = true
     }catch(e){
       result.ok = false
@@ -33,7 +31,7 @@ export default class Collection {
   async update(query, record){
     let result = {}
     try{
-      let raw = await this.collection.update(query, record)
+      let raw = await this.records.update(query, record)
       result.ok = true
       result.n = raw.result.nModified
     }catch(e){
@@ -47,7 +45,7 @@ export default class Collection {
   async delete(query){
     let result = {}
     try{
-      let raw = await this.collection.remove(query, {single: true})
+      let raw = await this.records.remove(query, {single: true})
       result.ok = true
       result.n = raw.result.n
     }catch(e){

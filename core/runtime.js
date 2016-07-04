@@ -1,6 +1,8 @@
 import fs from 'fs'
 import webpack from 'webpack'
 import * as store from './store'
+import * as util from './module/util.server'
+import * as model from './module/model.server'
 import Server from './Server'
 
 
@@ -16,12 +18,10 @@ import Server from './Server'
     throw error
   }
 
-  await store.init()
-
-
   require('./ready')
-  require('./module/util.server')
-  require('./module/model.server')
+  await store.init()
+  util.init()
+  model.init()
 
 
   var compiler = webpack({
