@@ -1,7 +1,7 @@
-import ModuleTable   from 'AIRDOG_DIR/core/module/kit/ModuleTable'
-import * as kit      from 'AIRDOG_DIR/core/module/kit'
-import ActiveRecord  from 'AIRDOG_DIR/core/store/ActiveRecord.client'
-import Collection    from 'AIRDOG_DIR/core/store/driver.ClientDB/Collection'
+import ModuleTable  from 'AIRDOG_DIR/core/module/kit/ModuleTable'
+import * as kit     from 'AIRDOG_DIR/core/module/kit'
+import ActiveRecord from 'AIRDOG_DIR/core/store/ActiveRecord.client'
+import Collection   from 'AIRDOG_DIR/core/store/driver/ClientDB/Collection'
 
 
 export function init(){
@@ -21,7 +21,5 @@ export function init(){
 
 
 function initDriver(Model){
-  let dname = 'default'
-  let cname = Model.name
-  Model._driver = new Collection(dname, cname)
+  Model._col = new Collection(Model.name)
 }

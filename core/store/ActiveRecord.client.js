@@ -1,37 +1,41 @@
+import * as kit from 'AIRDOG_DIR/core/store/kit'
+
 export default class ActiveRecord {
 
-  static _driver = null
+  static name = null
+  static _col = null
 
   static find(query){
-    let record = this._driver.find(query)
+    let record = this._col.find(query)
     return record ?
-      create(this.name, record)
+      kit.createModel(this.name, record)
     : null
   }
 
   static findAll(query){
-    let result = this._driver.findAll(query)
+    let records = this._col.findAll(query)
+    let i, record, models = []
+    for(i = 0; i < records.length; i++){
+      record = records[i]
+      models.push(kit.createModel(this.name, record))
+    }
+    return records
   }
 
   static add(record){
-    return this._driver.add(record)
+    return this._col.add(record)
   }
 
   static update(query, record){
-    return this._driver.update(query, record)
+    return this._col.update(query, record)
+  }
+
+  static remove(query){
+    return this._col.remove(query)
   }
 
   static delete(query){
-    return this._driver.delete(query)
+    return this._col.delete(query)
   }
 
-}
-
-
-function create(name, record){
-  let model = new $model[name]
-  for(let name in record){
-    model[name] = record[name]
-  }
-  return model
 }

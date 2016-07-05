@@ -11,9 +11,6 @@ try{
   util.init()
   model.init()
 
-  let user = $model.User.find()
-  console.log(user);
-
 }
 catch(e){
   console.error(e)

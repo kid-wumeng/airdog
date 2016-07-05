@@ -2,7 +2,6 @@ import FileManager from './kit/FileManager'
 import ModuleTable from './kit/ModuleTable'
 import ActiveRecord from '../store/ActiveRecord.server'
 import * as kit from './kit'
-import Collection from '../store/driver.MongoDB/Collection'
 
 
 export function init(){
@@ -30,7 +29,7 @@ export function init(){
 
 
 function initDriver(Model){
-  let dname = 'default'
-  let cname = Model.name
-  Model._driver = new Collection(dname, cname)
+  let dname = Model.database || 'default'
+  let cname = Model.collection || Model.name
+  Model._driver = $database[dname].use(cname)
 }
