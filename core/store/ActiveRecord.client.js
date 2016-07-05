@@ -19,19 +19,25 @@ export default class ActiveRecord {
       record = records[i]
       models.push(kit.createModel(this.name, record))
     }
-    return records
+    return models
   }
 
   static add(record){
-    return this._col.add(record)
+    record.addDate = new Date
+    this._col.add(record)
+    return kit.createModel(this.name, record)
   }
 
   static update(query, record){
+    record.updateDate = new Date
     return this._col.update(query, record)
   }
 
   static remove(query){
-    return this._col.remove(query)
+    // @TODO update $set
+    let record = this.find(query)
+    record.removeDate = new Date
+    return this._col.update(query, record)
   }
 
   static delete(query){

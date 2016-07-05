@@ -12,47 +12,24 @@ export default class Collection {
 
 
   async findAll(query){
-    return await this.col.find(query)
+    let cursor = this.col.find(query)
+    return await cursor.toArray()
   }
 
 
   async add(record){
-    let result = {}
-    try{
-      await this.col.insert(record)
-      result.ok = true
-    }catch(e){
-      result.ok = false
-      result.reason = e.errmsg
-    }
-    return result
+    let id = 1122
+    let result = await this.col.insert(record)
+    return result.result.ok === 1? id: null
   }
 
 
   async update(query, record){
-    let result = {}
-    try{
-      let raw = await this. ol.update(query, record)
-      result.ok = true
-      result.n = raw.result.nModified
-    }catch(e){
-      result.ok = false
-      result.reason = e.errmsg
-    }
-    return result
+    await this.col.update(query, record)
   }
 
 
   async delete(query){
-    let result = {}
-    try{
-      let raw = await this.col.remove(query, {single: true})
-      result.ok = true
-      result.n = raw.result.n
-    }catch(e){
-      result.ok = false
-      result.reason = e.errmsg
-    }
-    return result
+    await this.col.remove(query, {single: true})
   }
 }

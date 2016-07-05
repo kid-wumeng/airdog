@@ -26,5 +26,4 @@ import webpack from 'webpack'
 
   require('./runtime.server')
 
-
 })()

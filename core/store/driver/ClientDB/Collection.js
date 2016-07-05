@@ -33,6 +33,7 @@ export default class {
     let i, record
     for(i = 0; i < this.records.length; i++){
       record = this.records[i]
+      // @TODO move to ActiveRecord
       if(record.removeDate){
         continue
       }
@@ -52,6 +53,7 @@ export default class {
     let i, record, records = []
     for(i = 0; i < this.records.length; i++){
       record = this.records[i]
+      // @TODO move to ActiveRecord
       if(record.removeDate){
         continue
       }
@@ -66,7 +68,6 @@ export default class {
   add(record){
     let now = new Date
     record.id = `temp-${now.getTime()}`
-    record.addDate = now
     this.records.push(record)
     return record
   }
@@ -78,25 +79,12 @@ export default class {
     // @TODO replace this.find
     for(i = 0; i < this.records.length; i++){
       if(matchObject(query, this.records[i])){
-        record.updateDate = new Date
         this.records[i] = record
-        return {ok: true, n: 1}
+        return {ok: true}
       }
     }
   }
 
-
-  remove(query){
-    vaildQuery(query)
-    // @TODO replace this.find
-    for(i = 0; i < this.records.length; i++){
-      let record = this.records[i]
-      if(matchObject(query, record)){
-        record.removeDate = new Date
-        return {ok: true, n: 1}
-      }
-    }
-  }
 
   delete(query){
     vaildQuery(query)
