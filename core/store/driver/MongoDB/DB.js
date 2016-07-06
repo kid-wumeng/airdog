@@ -13,8 +13,12 @@ export default class DB {
     this.conn = await MongoClient.connect(`mongodb://${host}:${port}/${name}`)
   }
 
-  use(name){
-    return new Collection(this, name)
+  async use(name){
+    let col = new Collection(this, name)
+    if(col.init){
+      await col.init()
+    }
+    return col
   }
 
 }

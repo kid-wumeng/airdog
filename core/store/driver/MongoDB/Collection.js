@@ -2,7 +2,27 @@ export default class Collection {
 
   constructor(db, name){
     this.db = db
+    this.name = name
+    this.IDFactory = db.conn.collection('IDFactory')
     this.col = db.conn.collection(name)
+  }
+
+
+  async init(){
+    let result = await this.IDFactory.findOne({col: this.name})
+    if(!result){
+      this.IDFactory.insert({col: this.name, lastID: 0})
+    }
+  }
+
+
+  async makeID(){
+    let query = {col: this.name}
+    let sort = null
+    let $inc = {lastID: 1}
+    let op = {new: true}
+    let result = await this.IDFactory.findAndModify(query, sort, {$inc}, op)
+    return result.value.lastID
   }
 
 
@@ -18,7 +38,9 @@ export default class Collection {
 
 
   async add(record){
-    let id = 1122
+    let id = await this.makeID()
+    let _id = id
+    record = { id, _id, ...record }
     let result = await this.col.insert(record)
     return result.result.ok === 1? id: null
   }

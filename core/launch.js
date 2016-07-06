@@ -23,7 +23,10 @@ import webpack from 'webpack'
     })
   })
 
-
+try{
   require('./runtime.server')
+}catch(e){
+  console.log(e);
+}
 
 })()

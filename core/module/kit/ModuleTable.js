@@ -54,9 +54,9 @@ export default class ModuleTable {
   * @param (Function) - callback(name, {common, client, server})
   */
 
-  forEach(callback){
+  async forEach(callback){
     for(let name in this.table){
-      callback(name, this.table[name])
+      await callback(name, this.table[name])
     }
   }
 

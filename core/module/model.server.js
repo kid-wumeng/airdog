@@ -4,7 +4,7 @@ import ActiveRecord from '../store/ActiveRecord.server'
 import * as kit from './kit'
 
 
-export function init(){
+export async function init(){
   let fileManager = new FileManager({
     root: `${PROJECT_DIR}/model`,
     depth: 1,
@@ -21,15 +21,15 @@ export function init(){
     moduleTable.save(name, type, module)
   })
 
-  moduleTable.forEach((name, module)=>{
+  await moduleTable.forEach(async(name, module)=>{
     $model[name] = kit.createClass(name, [ActiveRecord, module.common, module.client])
-    initDriver($model[name])
+    await initDriver($model[name])
   })
 }
 
 
-function initDriver(Model){
+async function initDriver(Model){
   let dname = Model.database || 'default'
   let cname = Model.collection || Model.name
-  Model._driver = $database[dname].use(cname)
+  Model._driver = await $database[dname].use(cname)
 }

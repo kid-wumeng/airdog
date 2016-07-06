@@ -28,6 +28,7 @@ export default {
           'add-module-exports',
           'transform-async-to-generator',
           'transform-class-properties',
+          'transform-object-rest-spread',
         ],
       }
     }]

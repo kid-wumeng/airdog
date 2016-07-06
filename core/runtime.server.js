@@ -7,7 +7,6 @@ import Server from './net/Server'
 
 ;(async()=>{try{
 
-
   global.$database = {}
   global.$config = {}
   global.$util = {}
@@ -16,7 +15,7 @@ import Server from './net/Server'
   config.init()
   util.init()
   await database.init()
-  model.init()
+  await model.init()
 
   let bundle = fs.readFileSync(`${RUNTIME_DIR}/build/bundle.js`)
   let server = new Server()
@@ -24,6 +23,11 @@ import Server from './net/Server'
     yield this.render('index', {bundle})
   })
   server.listen(3000)
+
+
+await $model.User.add({
+  name: 'jiankong'
+})
 
 
 }catch(e){
