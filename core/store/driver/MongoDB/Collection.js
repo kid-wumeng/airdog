@@ -47,11 +47,13 @@ export default class Collection {
 
 
   async update(query, record){
-    await this.col.update(query, record)
+    let result = await this.col.findAndModify(query, null, {$set: record}, {new: true})
+    return result.value
   }
 
 
   async delete(query){
-    await this.col.remove(query, {single: true})
+    let result = await this.col.findAndRemove(query, null)
+    return result.value
   }
 }

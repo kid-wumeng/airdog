@@ -25,9 +25,18 @@ import Server from './net/Server'
   server.listen(3000)
 
 
-await $model.User.add({
-  name: 'jiankong'
-})
+  await $model.User.add({
+    name: 'hi'
+  })
+
+  let LiveQuery = require('./store/LiveQuery.server')
+  let liveQuery = new LiveQuery('User', {
+    method: 'findAll',
+    query: {name: 'hi'}
+  })
+  await liveQuery.init()
+
+  $model.User.delete({name: 'hi'})
 
 
 }catch(e){
