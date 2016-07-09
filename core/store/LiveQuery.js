@@ -2,9 +2,9 @@ import EventEmitter from 'events'
 
 export default class LiveQuery extends EventEmitter {
 
-  constructor(name, op){
+  constructor(model, op){
     super()
-    this.Model = $model[name]
+    this.Model = $model[model]
     this.method = op.method
     this.query = op.query
 
@@ -29,6 +29,7 @@ export default class LiveQuery extends EventEmitter {
   }
 
 
+  // @TODO remove
   async init(){
     await this.execute()
   }
@@ -100,7 +101,7 @@ export default class LiveQuery extends EventEmitter {
 
   findAll_addRecord = async (newRecord) => {
     let records = await this.execute()
-    if(this.include(records, record)){
+    if(this.include(records, newRecord)){
       this.emit('addRecord', newRecord)
     }
   }
@@ -108,7 +109,7 @@ export default class LiveQuery extends EventEmitter {
 
   findAll_updateRecord = async (newRecord) => {
     let records = await this.execute()
-    if(this.include(records, record)){
+    if(this.include(records, newRecord)){
       this.emit('updateRecord', newRecord)
     }
   }

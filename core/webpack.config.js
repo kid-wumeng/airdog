@@ -1,6 +1,6 @@
 export default {
   entry: [
-    // `${AIRDOG_DIR}/node_modules/babel-polyfill`,
+    `${AIRDOG_DIR}/node_modules/babel-polyfill`,
     `${AIRDOG_DIR}/core/runtime.client`
   ],
   output: {
@@ -19,6 +19,7 @@ export default {
   module: {
     loaders: [{
       test: /\.js$/,
+      exclude: `${AIRDOG_DIR}/node_modules`,
       loader: 'babel',
       query: {
         presets: ['es2015-without-strict'],
