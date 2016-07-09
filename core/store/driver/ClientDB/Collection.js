@@ -2,7 +2,7 @@ export default class {
 
   constructor(name){
     if(!$database[name]){
-      $database[name] = {}
+      $database[name] = []
     }
     this.records = $database[name]
   }

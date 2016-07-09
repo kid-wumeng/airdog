@@ -34,11 +34,26 @@ export default class DSP {
     })
   }
 
-  onSubscribe = (socket, message) => {
+  onSubscribe = async (socket, message) => {
     let id = socket.id
     let {model, method, query} = message
     let key = this.store.subscribe(model, method, query)
     socket.join(key)
+
+    switch(method){
+      case 'find':
+        let record = await $model[model].find(query)
+        if(record){
+          socket.emit('addRecord', {model, record})
+        }
+        break
+      case 'findAll':
+        let records = await $model[model].findAll(query)
+        if(records.length){
+          socket.emit('addRecords', {model, records})
+        }
+        break
+    }
   }
 
 }

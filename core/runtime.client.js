@@ -4,22 +4,44 @@ import * as model from 'AIRDOG_DIR/core/module/model.client'
 
 try{
 
+  global.$database = {}
+  global.$util = {}
+  global.$model = {}
+
+  util.init()
+  model.init()
+
+
   let socket = require('socket.io-client')()
-  socket.on('addRecord', function(message){
-    console.log('add');
-    console.log(message);
+  socket.on('addRecord', function({model, record}){
+    $database[model].push(record)
   })
-  socket.on('updateRecord', function(message){
-    console.log('update');
-    console.log(message);
+  socket.on('addRecords', function({model, records}){
+    $database[model].push(...records)
   })
-  socket.on('removeRecord', function(message){
-    console.log('remove');
-    console.log(message);
+  socket.on('updateRecord', function({model, record}){
+    $database[model].some((r, i)=>{
+      if(r.id === record.id){
+        $database[model][i] = record
+        return true
+      }
+    })
   })
-  socket.on('deleteRecord', function(message){
-    console.log('delete');
-    console.log(message);
+  socket.on('removeRecord', function({model, record}){
+    $database[model].some((r, i)=>{
+      if(r.id === record.id){
+        r.removeRecord = record.removeRecord
+        return true
+      }
+    })
+  })
+  socket.on('deleteRecord', function({model, record}){
+    $database[model].some((r, i)=>{
+      if(r.id === record.id){
+        $database[model].splice(i, 1)
+        return true
+      }
+    })
   })
 
   socket.emit('subscribe', {
@@ -30,13 +52,15 @@ try{
   })
 
 
+  global.addUser = function(name){
+    socket.emit('addRecord', {
+      model: 'User',
+      record: {
+        name
+      }
+    })
+  }
 
-  global.$database = {}
-  global.$util = {}
-  global.$model = {}
-
-  util.init()
-  model.init()
 
 }catch(e){
   console.error(e)
