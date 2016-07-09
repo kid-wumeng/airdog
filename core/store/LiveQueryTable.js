@@ -23,6 +23,16 @@ export default class LiveQueryTable extends EventEmitter {
       liveQuery.on('addRecord', (model, record)=>{
         this.emit('addRecord', {key, model, record})
       })
+      liveQuery.on('updateRecord', (model, record)=>{
+        this.emit('updateRecord', {key, model, record})
+      })
+      liveQuery.on('removeRecord', (model, record)=>{
+        this.emit('removeRecord', {key, model, record})
+      })
+      liveQuery.on('deleteRecord', (model, record)=>{
+        this.emit('deleteRecord', {key, model, record})
+      })
+      liveQuery.init()
       this.table[key] = liveQuery
     }
     return key

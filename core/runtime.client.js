@@ -6,15 +6,30 @@ try{
 
   let socket = require('socket.io-client')()
   socket.on('addRecord', function(message){
+    console.log('add');
     console.log(message);
   })
+  socket.on('updateRecord', function(message){
+    console.log('update');
+    console.log(message);
+  })
+  socket.on('removeRecord', function(message){
+    console.log('remove');
+    console.log(message);
+  })
+  socket.on('deleteRecord', function(message){
+    console.log('delete');
+    console.log(message);
+  })
+
   socket.emit('subscribe', {
     model: 'User',
     method: 'findAll',
     query: {
-      name: 'kid'
     }
   })
+
+
 
   global.$database = {}
   global.$util = {}

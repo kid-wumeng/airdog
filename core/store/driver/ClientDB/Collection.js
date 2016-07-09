@@ -4,22 +4,6 @@ export default class {
     if(!$database[name]){
       $database[name] = {}
     }
-    $database[name] = [{
-      name: 'kid',
-      age: 18,
-      pet: {
-        name: 'mimi',
-        type: 'cat',
-      }
-    },{
-      name: 'wumeng',
-      age: 20,
-      pet: {
-        name: 'wangcai',
-        type: 'dog',
-      }
-    }]
-
     this.records = $database[name]
   }
 

@@ -7,9 +7,30 @@ export default class DSP {
     this.store = store
 
     this.webSocket.on('subscribe', this.onSubscribe)
+    this.webSocket.on('addRecord', (socket, {model, record})=>{
+      $model[model].add(record)
+    })
+    this.webSocket.on('updateRecord', (socket, {model, query, record})=>{
+      $model[model].update(query, record)
+    })
+    this.webSocket.on('removeRecord', (socket, {model, query})=>{
+      $model[model].remove(query)
+    })
+    this.webSocket.on('deleteRecord', (socket, {model, query})=>{
+      $model[model].delete(query)
+    })
+
     this.store.on('addRecord', ({key, model, record})=>{
-      console.log(Math.random());
       this.webSocket.io.in(key).emit('addRecord', {model, record})
+    })
+    this.store.on('updateRecord', ({key, model, record})=>{
+      this.webSocket.io.in(key).emit('updateRecord', {model, record})
+    })
+    this.store.on('removeRecord', ({key, model, record})=>{
+      this.webSocket.io.in(key).emit('removeRecord', {model, record})
+    })
+    this.store.on('deleteRecord', ({key, model, record})=>{
+      this.webSocket.io.in(key).emit('deleteRecord', {model, record})
     })
   }
 

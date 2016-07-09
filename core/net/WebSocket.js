@@ -15,9 +15,8 @@ export default class WebSocket {
   }
 
   forEachEvent(iterator){
-    let name, handlers
-    for(name in this._eventDict){
-      handlers = this._eventDict[name]
+    for(let name in this._eventDict){
+      let handlers = this._eventDict[name]
       iterator(name, (...args)=>{
         handlers.forEach(handler=>handler(...args))
       })
