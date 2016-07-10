@@ -19,6 +19,9 @@ import LiveQuery from './store/LiveQuery'
   await model.init()
   net.init()
 
+  let user = new $model.User
+  user.say()
+
 }catch(e){
   let msg = e instanceof Error ? e.stack : e
   console.log(`\x1b[31m${msg}\x1b[0m`)
