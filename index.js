@@ -14,4 +14,4 @@ require('babel-register')({
   ]
 })
 
-require('./core/launch')
+require('./launch')
