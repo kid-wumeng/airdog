@@ -5,13 +5,13 @@ import store from '../store'
 export default {
   dict: {},
 
-  init(){
+  async init(){
     let User = require('./User')
     let Post = require('./Post')
     User.$schema = new Schema(User.schema)
     Post.$schema = new Schema(Post.schema)
-    User.$table = store.database('orz-world').table('User')
-    Post.$table = store.database('orz-world').table('Post')
+    User.$table = await store.database('orz-world').table('User')
+    Post.$table = await store.database('orz-world').table('Post')
     this.dict.User = User
     this.dict.Post = Post
   }

@@ -10,8 +10,10 @@ export default class {
     this.conn = conn
   }
 
-  table(name){
-    return new Table(name, this.conn)
+  async table(name){
+    let table = new Table(name, this.conn)
+    await table.init()
+    return table
   }
 
 }

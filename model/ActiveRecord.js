@@ -28,6 +28,33 @@ export default class ActiveRecord {
     return records
   }
 
+
+  static async create(record){
+    record = createFilter(this.$schema, record)
+    record.createDate = new Date
+    record.id = await this.$table.create(record)
+    return record.id? record: null
+  }
+
+  static async update(query, record){
+    await this.$table.update(query, record)
+  }
+
+}
+
+
+
+function createFilter(schema, record){
+  let actualRecord = {}
+  schema.list.forEach(item=>{
+    let {keyPath, type} = item
+    let value = _.get(record, keyPath)
+    value = filter(item, value)
+    if(value !== undefined){
+      _.set(actualRecord, keyPath, value)
+    }
+  })
+  return actualRecord
 }
 
 

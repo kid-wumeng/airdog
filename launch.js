@@ -5,13 +5,13 @@
   var model = require('./model');
 
   await store.init()
-  model.init()
+  await model.init()
 
 
   global.$model = model.dict
 
-  let user = await $model.User.findAll()
-  console.log(user);
+  let user = await $model.User.update({name: 'kid2'}, {id: 300})
+  // console.log(user);
 
 
 }catch(e){
