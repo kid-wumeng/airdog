@@ -1,17 +1,31 @@
-export default class {
+import requireDir from 'require-dir'
+import ActiveRecord from './ActiveRecord'
+import Query from './Query'
+import Schema from './Schema'
 
-  dict = {}
+export default class Store {
 
-  async init(){
-    let driver = {
-      MongoDB: require('./driver/MongoDB')
-    }
-    let name = 'orz-world'
-    this.dict[name] = await driver.MongoDB.connect(name)
+  ActiveRecord = ActiveRecord
+  Query = Query
+
+  database = null
+  table = {}
+
+  async connect(){
+    let driver = requireDir('./driver', {recurse: true})
+    let config = $config.database
+    this.database = new driver[config.driver].DB(config)
+    await this.database.connect()
   }
 
-  database(name){
-    return this.dict[name]
+  async wrap(model){
+    await this.initTable(model)
+  }
+
+  async initTable(model){
+    let table = this.database.table(model.name)
+    await table.init(new Schema(model.schema), this)
+    this.table[model.name] = table
   }
 
 }

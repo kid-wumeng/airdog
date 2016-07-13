@@ -2,9 +2,6 @@
   "name": "airdog",
   "version": "0.3.0",
   "description": "A Web Framework for NodeJS",
-  "bin": {
-    "airdog": "index.js"
-  },
   "homepage": "https://github.com/KID-WuMeng/airdog",
   "author": {
     "name": "KID.WuMeng",

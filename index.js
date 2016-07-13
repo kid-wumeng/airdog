@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 require('babel-register')({
   plugins: [
     require('babel-plugin-transform-decorators-legacy').default,
