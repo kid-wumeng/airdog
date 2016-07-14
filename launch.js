@@ -27,25 +27,17 @@ import store from './store'
 
 
 
-  let Query = require('./store/Query')
-  let query = new Query('User', 'find')
-  query
-    .where('name').in('kid')
-    .join('posts')
 
-  let r = await query.fetch()
+  let Query = require('./store/Query')
+  let query = new Query(store.table['User'], 'find')
+  query.where('name', '一二三')
 
 
 
   let Modifier = require('./store/Modifier')
-  let modifier = new Modifier('User')
-  let user = await modifier.set({
-    name: '一二三',
-    age: 333,
-  }).create()
+  let modifier = new Modifier(store.table['User'], query)
+  let user = await modifier.remove()
   console.log(user);
-
-
 
 
 

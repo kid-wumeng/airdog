@@ -28,4 +28,9 @@ export default class Store {
     this.table[model.name] = table
   }
 
+
+  getTable(name){
+    return this.table[name]
+  }
+
 }
