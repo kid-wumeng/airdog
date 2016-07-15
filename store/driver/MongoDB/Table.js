@@ -31,6 +31,19 @@ export default class Table {
     if(!result){
       this.idFactory.insert({table, id: 0})
     }
+    await this.ensureUniqueID()
+  }
+
+
+
+  async ensureUniqueID()
+  {
+    let indexes = await this.coll.indexes()
+    let hasUniqueIndex = indexes.some(index=>{
+      return index.key['id'] && index.unique
+    })
+    if(!hasUniqueIndex)
+      await this.coll.createIndex({id: 1}, {unique: true})
   }
 
 

@@ -30,42 +30,15 @@ import store from './store'
 
   let Query = require('./store/Query')
   let query = new Query(store.table['User'], 'find')
-  query.where('name', '一二三')
+  query.where('name', 'wu')
+  // console.log(await query.fetch());
 
 
 
   let Modifier = require('./store/Modifier')
   let modifier = new Modifier(store.table['User'], query)
-  let user = await modifier.remove()
+  let user = await modifier.set('name', 55).update()
   console.log(user);
-
-
-
-  // var model = require('./model');
-  //
-  // await store.init()
-  // await model.init()
-  //
-  //
-  // global.$model = model.dict
-  //
-  //
-  // let query = new store.Query(store.Query.FIND)
-  // query
-  //   .where(1)
-  //   .where('height').max(18).in([77])
-  //   .where('age', 18)
-  //   .where({name: 'kid'})
-  //
-  //   console.log(query.$where)
-
-
-  // let user = await $model.User
-  //   .find()
-  //   .where({id: 1, age: 18})
-  //   .where('age').max(18)
-  //   .fetch()
-  // console.log(user);
 
 
 }catch(e){

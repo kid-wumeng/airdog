@@ -7,8 +7,10 @@ export default class Query {
   static FIND = 'find'
   static FIND_ALL = 'findAll'
 
+
   table = null
   method = null
+
 
   $where = {}
   $joins = []
@@ -16,7 +18,9 @@ export default class Query {
   $skip = null
   $limit = null
 
+
   _currentField = null
+  _validFailed = false
 
 
 
@@ -62,16 +66,22 @@ export default class Query {
 
   where_field_value(field, value)
   {
-    this.$where[field] = value
+    if(this.validField(field, value)){
+      this.$where[field] = value
+    }
     return this
   }
 
 
 
-  where_obj(data)
+  where_obj(obj)
   {
-    for(let field in data){
-      this.$where[field] = data[field]
+    let field, value
+    for(field in obj){
+      value = obj[field]
+      if(this.validField(field, value)){
+        this.$where[field] = value
+      }
     }
     return this
   }
@@ -81,9 +91,11 @@ export default class Query {
   in(...args)
   {
     let field = this.$where[this._currentField]
-    args.length === 1 && Array.isArray(args[0]) ?
-      field['$in'] = args[0]
-    : field['$in'] = args
+    let isOneArray = args.length === 1 && Array.isArray(args[0])
+    let value = isOneArray? args[0]: args
+    if(this.validField(field, value)){
+      field['$in'] = value
+    }
     return this
   }
 
@@ -91,26 +103,22 @@ export default class Query {
 
   max(value)
   {
-    if(_.isNumber(value) || _.isDate(value)){
-      let field = this.$where[this._currentField]
+    let field = this.$where[this._currentField]
+    if(this.validField(field, value)){
       field['$max'] = value
-      return this
-    }else{
-      throw `Invalid Param: Query.prototype.max()`
     }
+    return this
   }
 
 
 
   min(value)
   {
-    if(_.isNumber(value) || _.isDate(value)){
-      let field = this.$where[this._currentField]
+    let field = this.$where[this._currentField]
+    if(this.validField(field, value)){
       field['$min'] = value
-      return this
-    }else{
-      throw `Invalid Param: Query.prototype.min()`
     }
+    return this
   }
 
 
@@ -122,10 +130,27 @@ export default class Query {
 
 
 
+  validField(field, value){
+    let schema = this.table.schema
+    if(!schema.existField(field)){
+      throw `The field ${field} is not exist in schema`
+    }
+    if(schema.validField(field, value)){
+      return true
+    }else{
+      this._validFailed = true
+      return false
+    }
+  }
+
+
+
   async fetch()
   {
-    // @TODO Filter where
-    // @TODO Ignore has removed record
+    if(_.isEmpty(this.$where) && this._validFailed){
+      return null
+    }
+    this.$where['removeDate'] = null
     switch(this.method){
       case Query.FIND:
         return await this.fetchOne()
@@ -139,9 +164,8 @@ export default class Query {
   async fetchOne()
   {
     let record = await this.table.find(this)
-    if( record ){
+    if( record )
       record = this.table.schema.filter(record)
-    }
     return record
   }
 

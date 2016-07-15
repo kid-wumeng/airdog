@@ -102,7 +102,7 @@ export default class Schema {
       value = _.get(inputRecord, field)
       if(value){
         type = op.$type
-        if(this.matchType(value, type)){
+        if(this.matchType(type, value)){
           if(type !== Object){
             _.set(outputRecord, field, value)
           }
@@ -114,7 +114,7 @@ export default class Schema {
 
 
 
-  matchType(value, type)
+  matchType(type, value)
   {
     switch(typeof value){
       case 'boolean': return type === Boolean
@@ -123,6 +123,20 @@ export default class Schema {
       default:
         return value instanceof type
     }
+  }
+
+
+
+  existField(field){
+    return _.isPlainObject(this.allField[field])
+  }
+
+
+
+  validField(field, value){
+    // Assume the the field must exist
+    let op = this.allField[field]
+    return this.matchType(op.$type, value)
   }
 
 }
