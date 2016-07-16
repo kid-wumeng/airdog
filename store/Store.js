@@ -31,6 +31,7 @@ export default class Store {
     let _table = this._database.table(model.name)
     await _table.init(new Schema(model.schema), this)
     this._table[model.name] = _table
+    model._table = _table
   }
 
 

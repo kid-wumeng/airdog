@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import store from './'
+import Modifier from './Modifier'
 import ActiveQuery from './ActiveQuery'
 
 
@@ -163,6 +164,7 @@ export default class Query {
         break
     }
     store.saveActiveQuery(new ActiveQuery(this, result))
+    return result
   }
 
 
@@ -183,6 +185,30 @@ export default class Query {
       return this.table.schema.filter(record)
     })
     return records
+  }
+
+
+
+  set(...args){
+    return (new Modifier(this.table, this)).set(...args)
+  }
+
+
+
+  inc(...args){
+    return (new Modifier(this.table, this)).inc(...args)
+  }
+
+
+
+  async remove(){
+    return await (new Modifier(this.table, this)).remove()
+  }
+
+
+
+  async delete(){
+    return await (new Modifier(this.table, this)).delete()
   }
 
 }

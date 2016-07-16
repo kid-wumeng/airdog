@@ -26,24 +26,11 @@ import store from './store'
   }
 
 
+  store.activeQueryManager.on('modify', action=>{console.log(action);})
 
-  let ActiveQuery = require('./store/ActiveQuery')
-  let Query = require('./store/Query')
-  let query = new Query(store.getTable('User'), 'find')
-  query.where(54)
+  await $model.User.find(53).fetch()
+  await $model.User.find(53).set('name', 'kid').update()
 
-  let user = await query.fetch()
-  console.log(store.activeQueryManager);
-
-
-  // // console.log(await query.fetch());
-  //
-  //
-  //
-  // let Modifier = require('./store/Modifier')
-  // let modifier = new Modifier(store.getTable('User'), query)
-  // let user = await modifier.inc('pet.age', 10).update()
-  // console.log(user);
 
 
 

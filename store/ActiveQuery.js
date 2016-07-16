@@ -48,6 +48,16 @@ export default class ActiveQuery extends EventEmitter {
   }
 
 
+  notify(event, record){
+    switch(event){
+      case 'create': this.handleCreate(record); break
+      case 'update': this.handleUpdate(record); break
+      case 'remove': this.handleRemove(record); break
+      case 'delete': this.handleDelete(record); break
+    }
+  }
+
+
   find = {
 
     async handleCreate(newRecord){

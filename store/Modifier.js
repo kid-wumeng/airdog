@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import store from './'
 
 
 export default class Modifier {
@@ -76,8 +77,10 @@ export default class Modifier {
   {
     this.$set['createDate'] = new Date
     let record = await this.table.create(this)
-    if( record )
+    if( record ){
       record = this.table.schema.filter(record)
+      Store.activeQueryManager.notify(this.table, 'create', record)
+    }
     return record
   }
 
@@ -88,8 +91,10 @@ export default class Modifier {
     delete this.$set['id']  // Can't update id
     this.$set['updateDate'] = new Date
     let record = await this.table.update(this.query, this)
-    if( record )
+    if( record ){
       record = this.table.schema.filter(record)
+      store.activeQueryManager.notify(this.table, 'update', record)
+    }
     return record
   }
 
@@ -99,8 +104,10 @@ export default class Modifier {
   {
     this.$set['removeDate'] = new Date
     let record = await this.table.update(this.query, this)
-    if( record )
+    if( record ){
       record = this.table.schema.filter(record)
+      store.activeQueryManager.notify(this.table, 'remove', record)
+    }
     return record
   }
 
@@ -109,8 +116,10 @@ export default class Modifier {
   async delete()
   {
     let record = await this.table.delete(this.query)
-    if( record )
+    if( record ){
       record = this.table.schema.filter(record)
+      store.activeQueryManager.notify(this.table, 'delete', record)
+    }
     return record
   }
 
