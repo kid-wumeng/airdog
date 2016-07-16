@@ -7,7 +7,6 @@ export default class Modifier {
   table = null
   query = null
   $set = {}
-  // @TODO The method inc()
   $inc = {}
 
 
@@ -48,6 +47,15 @@ export default class Modifier {
       if(this.validField(field, value)){
         this.$set[field] = value
       }
+    }
+    return this
+  }
+
+
+
+  inc(field, value){
+    if(this.validField(field, value)){
+      this.$inc[field] = value
     }
     return this
   }

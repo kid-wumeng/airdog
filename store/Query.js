@@ -1,4 +1,6 @@
 import _ from 'lodash'
+import store from './'
+import ActiveQuery from './ActiveQuery'
 
 
 export default class Query {
@@ -151,12 +153,16 @@ export default class Query {
       return null
     }
     this.$where['removeDate'] = null
+    let result
     switch(this.method){
       case Query.FIND:
-        return await this.fetchOne()
+        result = await this.fetchOne()
+        break
       case Query.FIND_ALL:
-        return await this.fetchAll()
+        result = await this.fetchAll()
+        break
     }
+    store.saveActiveQuery(new ActiveQuery(this, result))
   }
 
 

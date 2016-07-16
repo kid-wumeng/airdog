@@ -1,36 +1,47 @@
 import requireDir from 'require-dir'
 import ActiveRecord from './ActiveRecord'
-import Query from './Query'
 import Schema from './Schema'
+import Query from './Query'
+import Modifier from './Modifier'
+import ActiveQueryManager from './ActiveQueryManager'
 
 export default class Store {
 
   ActiveRecord = ActiveRecord
   Query = Query
 
-  database = null
-  table = {}
+  _database = null
+  _table = {}
+  activeQueryManager = new ActiveQueryManager()
+
 
   async connect(){
     let driver = requireDir('./driver', {recurse: true})
     let config = $config.database
-    this.database = new driver[config.driver].DB(config)
-    await this.database.connect()
+    this._database = new driver[config.driver].DB(config)
+    await this._database.connect()
   }
 
   async wrap(model){
     await this.initTable(model)
   }
 
+
   async initTable(model){
-    let table = this.database.table(model.name)
-    await table.init(new Schema(model.schema), this)
-    this.table[model.name] = table
+    let _table = this._database.table(model.name)
+    await _table.init(new Schema(model.schema), this)
+    this._table[model.name] = _table
   }
 
 
   getTable(name){
-    return this.table[name]
+    return this._table[name]
+  }
+
+
+
+  saveActiveQuery(activeQuery){
+    this.activeQueryManager.save(activeQuery)
   }
 
 }

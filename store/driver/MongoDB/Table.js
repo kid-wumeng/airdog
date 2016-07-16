@@ -75,8 +75,7 @@ export default class Table {
 
   async create(modifier)
   {
-    // @TODO $set => record (JSON)
-    let record = modifier.$set
+    let record = this.getJSON(modifier.$set)
     record.id = await this.makeID()
     let {ops} = await this.coll.insert(record)
     return ops[0]
@@ -128,6 +127,15 @@ export default class Table {
   }
 
 
+  getJSON($set){
+    let json = {}
+    let field, value
+    for(field in $set){
+      value = $set[field]
+      _.set(json, field, value)
+    }
+    return json
+  }
 
 
   getUpdater(modifier)
