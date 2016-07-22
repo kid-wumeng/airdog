@@ -1,17 +1,44 @@
+import requireDir from 'require-dir'
+import fs from 'fs-extra'
+import yaml from 'js-yaml'
+import _ from 'lodash'
+import * as client from './client'
+import store from './store'
+import * as net from './net'
+
+
 (async()=>{try{
 
+  global.BEO = __dirname
+  global.CWD = process.cwd()
 
-  var store = require('./store');
-  var model = require('./model');
+  client.init()
 
-  await store.init()
-  await model.init()
+  global.$config = {
+    database: yaml.safeLoad(fs.readFileSync(`${CWD}/config/database.yml`, 'utf8'))
+  }
+
+  net.init()
+
+  await store.connect()
+
+  global.ActiveRecord = store.ActiveRecord
+  global.$model = requireDir(`${CWD}/model`)
+
+  for(let name in $model){
+    let model = $model[name]
+    if(model._isActiveRecord){
+      await store.wrap(model)
+    }
+  }
 
 
-  global.$model = model.dict
+  await $model.Post.find().fetch()
+  // setInterval(async()=>{
+  //   await $model.User.create({'name': 'kid'})
+  // }, 1000)
 
-  let user = await $model.User.update({name: 'kid2'}, {id: 300})
-  // console.log(user);
+
 
 
 }catch(e){

@@ -4,46 +4,15 @@ export default class Table {
 
 
   name = null
-  conn = null
-  coll = null
+  records = null
   schema = null
   store = null
 
 
-
-  constructor(name, conn)
+  constructor(name)
   {
     this.name = name
-    this.conn = conn
-    this.coll = conn.collection(name)
-    this.idFactory = conn.collection('id_factory')
-  }
-
-
-
-  async init(schema, store)
-  {
-    // @REVIEW
-    this.schema = schema
-    this.store = store
-    let table = this.name
-    let result = await this.idFactory.findOne({table})
-    if(!result){
-      this.idFactory.insert({table, id: 0})
-    }
-    await this.ensureUniqueID()
-  }
-
-
-
-  async ensureUniqueID()
-  {
-    let indexes = await this.coll.indexes()
-    let hasUniqueIndex = indexes.some(index=>{
-      return index.key['id'] && index.unique
-    })
-    if(!hasUniqueIndex)
-      await this.coll.createIndex({id: 1}, {unique: true})
+    this.records = $database[name]
   }
 
 
@@ -51,11 +20,17 @@ export default class Table {
   async find(query)
   {
     let where = this.formatWhere(query.$where)
-    // @TODO Set fields
-    // @TODO temp sort
-    let record = await this.coll.findOne(where, {sort: {id: -1}})
-    await this.join(record, query.$joins)
-    return record
+    let targetRecord = null
+    this.records.some(record=>{
+      if(this.match(record, where)){
+        targetRecord = record
+        return true
+      }else{
+        return false
+      }
+    })
+    // await this.join(record, query.$joins)
+    return targetRecord
   }
 
 
@@ -63,23 +38,27 @@ export default class Table {
   async findAll(query)
   {
     let where = this.formatWhere(query.$where)
-    // @TODO Set fields
-    let cursor = this.coll.find(where)
-    let records = await cursor.toArray()
-    for(let i = 0; i < records.length; i++){
-      await this.join(records[i], query.$joins)
-    }
-    return records
+    let targetRecords = this.records.filter(record=>{
+      return this.match(record, where)
+    })
+    // await this.join(record, query.$joins)
+    return targetRecords
   }
 
 
 
   async create(modifier)
   {
-    let record = this.getJSON(modifier.$set)
-    record.id = await this.makeID()
-    let {ops} = await this.coll.insert(record)
-    return ops[0]
+    let set = modifier.$set
+    let field, value
+    let record = {}
+    for(field in set){
+      value = set[field]
+      _.set(record, field, value)
+    }
+    // this.records.push(record)
+    socket.emit('create', {model: this.name, record})
+    return record
   }
 
 
@@ -101,6 +80,17 @@ export default class Table {
     return value
   }
 
+
+  match(record, where){
+    let field, value
+    for(field in where){
+      value = where[field]
+      if(_.get(record, field) != value){
+        return false
+      }
+    }
+    return true
+  }
 
 
   formatWhere(where)
@@ -128,16 +118,6 @@ export default class Table {
   }
 
 
-  getJSON($set){
-    let json = {}
-    let field, value
-    for(field in $set){
-      value = $set[field]
-      _.set(json, field, value)
-    }
-    return json
-  }
-
 
   getUpdater(modifier)
   {
@@ -146,17 +126,6 @@ export default class Table {
     if(!_.isEmpty(modifier.$inc)) updater.$inc = modifier.$inc
     return updater
   }
-
-
-
-  async makeID()
-  {
-    let table = this.name
-    let $inc = {id: 1}
-    let {value} = await this.idFactory.findAndModify({table}, null, {$inc}, {new: true})
-    return value.id
-  }
-
 
 
   async join(record, joinFields)
