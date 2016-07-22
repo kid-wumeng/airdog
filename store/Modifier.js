@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import store from './'
 
 
 export default class Modifier {
@@ -79,7 +78,12 @@ export default class Modifier {
     let record = await this.table.create(this)
     if( record ){
       record = this.table.schema.filter(record)
-      Store.activeQueryManager.notify(this.table, 'create', record)
+      if(global.isClient){
+        var store = require('BEO/store')
+      }else{
+        var store = require('./')
+      }
+      store.activeQueryManager.notify(this.table, 'create', record)
     }
     return record
   }

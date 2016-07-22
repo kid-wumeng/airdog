@@ -2,16 +2,23 @@ import requireDir from 'require-dir'
 import fs from 'fs-extra'
 import yaml from 'js-yaml'
 import _ from 'lodash'
+import * as client from './client'
 import store from './store'
+import * as net from './net'
 
 
 (async()=>{try{
 
+  global.BEO = __dirname
   global.CWD = process.cwd()
+
+  client.init()
 
   global.$config = {
     database: yaml.safeLoad(fs.readFileSync(`${CWD}/config/database.yml`, 'utf8'))
   }
+
+  net.init()
 
   await store.connect()
 
@@ -26,10 +33,10 @@ import store from './store'
   }
 
 
-  store.activeQueryManager.on('modify', action=>{console.log(action);})
-
-  await $model.User.find(53).fetch()
-  await $model.User.find(53).set('name', 'kid').update()
+  await $model.Post.find().fetch()
+  // setInterval(async()=>{
+  //   await $model.User.create({'name': 'kid'})
+  // }, 1000)
 
 
 

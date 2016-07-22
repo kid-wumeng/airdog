@@ -1,26 +1,35 @@
-import requireDir from 'require-dir'
-import ActiveRecord from './ActiveRecord'
-import Schema from './Schema'
-import Query from './Query'
-import Modifier from './Modifier'
-import ActiveQueryManager from './ActiveQueryManager'
+if(global.isClient){
+  var ActiveRecord = require('BEO/store/ActiveRecord')
+  var Schema = require('BEO/store/Schema')
+  var Query = require('BEO/store/Query')
+  var Modifier = require('BEO/store/Modifier')
+  var ActiveQueryManager = require('BEO/store/ActiveQueryManager')
+}else{
+  var ActiveRecord = require('./ActiveRecord')
+  var Schema = require('./Schema')
+  var Query = require('./Query')
+  var Modifier = require('./Modifier')
+  var ActiveQueryManager = require('./ActiveQueryManager')
+}
+
 
 export default class Store {
 
   ActiveRecord = ActiveRecord
   Query = Query
-
   _database = null
   _table = {}
   activeQueryManager = new ActiveQueryManager()
 
 
   async connect(){
-    let driver = requireDir('./driver', {recurse: true})
     let config = $config.database
-    this._database = new driver[config.driver].DB(config)
+    let DB = require(`./driver/${config.driver}/DB`)
+    this._database = new DB(config)
     await this._database.connect()
   }
+
+
 
   async wrap(model){
     await this.initTable(model)
@@ -35,10 +44,20 @@ export default class Store {
   }
 
 
+  initVirtualTable(model){
+    $database[model.name] = []
+    let Table = require(`./driver/VirtualDB/Table`)
+    let table = new Table(model.name)
+    table.schema = new Schema(model.schema)
+    table.store = this
+    this._table[model.name] = Table
+    model._table = table
+  }
+
+
   getTable(name){
     return this._table[name]
   }
-
 
 
   saveActiveQuery(activeQuery){

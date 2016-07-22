@@ -1,8 +1,13 @@
-import Query from './Query'
-import Modifier from './Modifier'
+if(global.isClient){
+  var Query = require('BEO/store/Query')
+  var Modifier = require('BEO/store/Modifier')
+}else{
+  var Query = require('./Query')
+  var Modifier = require('./Modifier')
+}
 
 
-export default class ActiveRecord {
+module.exports = class ActiveRecord {
 
 
   static _isActiveRecord = true

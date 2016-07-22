@@ -1,7 +1,8 @@
 import EventEmitter from 'events'
-import crypto from 'crypto'
+import md5 from 'md5'
 import _ from 'lodash'
-import Query from './Query'
+
+
 
 export default class ActiveQuery extends EventEmitter {
 
@@ -16,6 +17,11 @@ export default class ActiveQuery extends EventEmitter {
 
   constructor(query, initData){
     super()
+    if(global.isClient){
+      var Query = require('BEO/store/Query')
+    }else{
+      var Query = require('./Query')
+    }
     this.query = query
     this.table = query.table
     this.snapshot = initData
@@ -36,10 +42,7 @@ export default class ActiveQuery extends EventEmitter {
 
   makeID(){
     let where = JSON.stringify(this.query.$where)
-    this.id = crypto
-      .createHash('md5')
-      .update(where)
-      .digest('hex')
+    this.id = md5(where)
   }
 
 
@@ -63,27 +66,27 @@ export default class ActiveQuery extends EventEmitter {
     async handleCreate(newRecord){
       await this.fetch()
       if(this.snapshot && this.snapshot.id === newRecord.id){
-        this.emit('modify', {type: 'create', record: newRecord})
+        this.emit('modify', {method: 'create', record: newRecord})
       }
     },
 
     async handleUpdate(newRecord){
       await this.fetch()
       if(this.snapshot && this.snapshot.id === newRecord.id){
-        this.emit('modify', {type: 'update', record: newRecord})
+        this.emit('modify', {method: 'update', record: newRecord})
       }
     },
 
     async handleRemove(dirtyRecord){
       if(this.snapshot && this.snapshot.id === dirtyRecord.id){
-        this.emit('modify', {type: 'remove', record: dirtyRecord})
+        this.emit('modify', {method: 'remove', record: dirtyRecord})
         await this.fetch()
       }
     },
 
     async handleDelete(dirtyRecord){
       if(this.snapshot && this.snapshot.id === dirtyRecord.id){
-        this.emit('modify', {type: 'delete', record: dirtyRecord})
+        this.emit('modify', {method: 'delete', record: dirtyRecord})
         await this.fetch()
       }
     },

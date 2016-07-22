@@ -1,5 +1,11 @@
 import EventEmitter from 'events'
-import ActiveQuery from './ActiveQuery'
+
+if(global.isClient){
+  var ActiveQuery = require('BEO/store/ActiveQuery')
+}else{
+  var ActiveQuery = require('./ActiveQuery')
+}
+
 
 export default class ActiveQueryManager extends EventEmitter {
 
@@ -15,6 +21,7 @@ export default class ActiveQueryManager extends EventEmitter {
   //   },
   // }
   dict = {}
+
 
   save(activeQuery){
     activeQuery.on('modify', action=>{

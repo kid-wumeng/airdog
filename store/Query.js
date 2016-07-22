@@ -1,7 +1,12 @@
 import _ from 'lodash'
-import store from './'
-import Modifier from './Modifier'
-import ActiveQuery from './ActiveQuery'
+
+if(global.isClient){
+  var Modifier = require('BEO/store/Modifier')
+  var ActiveQuery = require('BEO/store/ActiveQuery')
+}else{
+  var Modifier = require('./Modifier')
+  var ActiveQuery = require('./ActiveQuery')
+}
 
 
 export default class Query {
@@ -162,6 +167,11 @@ export default class Query {
       case Query.FIND_ALL:
         result = await this.fetchAll()
         break
+    }
+    if(global.isClient){
+      var store = require('BEO/store')
+    }else{
+      var store = require('./')
     }
     store.saveActiveQuery(new ActiveQuery(this, result))
     return result
